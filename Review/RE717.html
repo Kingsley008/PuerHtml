@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS:array</title>
+</head>
+<body>
+
+</body>
+<script>
+    function print(value) {
+        console.info(value)
+    }
+    var person = {
+        name :"a"
+    }
+    var arr = [123,"123", true, [123],person, function () {
+        console.info("function")
+    }]
+    function printByCallBack(arr) {
+        arr.forEach( function (value, index,obj){
+            console.info(typeof value) // number string boolean true object object function
+        })
+    }
+    printByCallBack(arr);
+    arr2 = ["hello"]
+    arr3 = ["world"]
+    var arr4 = arr2.concat(arr3); // [hello,world]
+    print(arr4);
+    var str = arr4.join("<-->"); //str:hello<-->world
+    print(str);
+    arr4.push("my name is kingsley");
+    var sentence = arr4.pop();
+    var arr5 = sentence.split(" ");
+    print(arr5[arr5.length-1]) //kingsley
+
+    arr4.splice(0,2,"你","好"); //["你","好"]
+    var good = arr4.splice(0,2,"你","好").slice(-1); //取到最后一位
+    print(good); //好
+    //定义一个防止没有写new的构造函数
+    function Person(name,age) {
+        if(this instanceof arguments.callee != true){
+            return new Person(name,age);
+        }
+        this.name = name;
+        this.age = age;
+    }
+    p1 = Person("a" , 11);
+    print(p1 instanceof  Person); //true
+    //利用数组进行自动填充对象
+    var objArr =[];
+    function fillObj(objArr) {
+        for(var i =1; i < 5; i++){
+            objArr[objArr.length] = new Person("User"+i,Math.floor(Math.random()*100));
+        }
+    }
+
+    fillObj(objArr);
+    print(objArr);
+
+    function printPerson(objArr) {
+      objArr.forEach(function (p1, p2, p3) { print(p1.name+":"+p1.age) })
+    }
+    printPerson(objArr); //排序前
+
+    objArr.sort(function (p1,p2) {
+        if (p1.age > p2.age) return 1;
+        if (p1.age < p2.age) return -1;
+        return 0;
+    })
+    printPerson(objArr); //排序后
+</script>
+</html>

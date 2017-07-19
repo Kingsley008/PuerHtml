@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>first-child&first-of-type</title>
+    <style>
+        /*class 有两个属性值的情况下 包含其中一个即可*/
+        a[class ~= a]{
+            font-weight: bold;
+        }
+        /*href 内容的包含*/
+        a[href *= "www.163.com"]{
+            color: palevioletred;
+        }
+        li:first-child{
+            color: red;
+        }
+        /*li:first-of-type{*/
+            /*color: palevioletred;*/
+        /*}*/
+        a.a{
+
+        }
+
+    </style>
+</head>
+<body>
+<a href="www.163.com.cn" title="a" class="a b" > 链接1 </a>
+<h2>无序列表排行榜</h2>
+<li>ONE</li>
+<li>Two</li>
+<ul>
+    <li>Q</li>
+    <li>W</li>
+    <li>
+        <ol>
+            <li>a</li>
+            <li>b</li>
+        </ol>
+    </li>
+</ul>
+<h2>自定义列表</h2>
+<dl>
+    <dt>书名《1989》</dt>
+    <dd>出版社：xxxxx</dd>
+    <dd>作者：xxxxx</dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3> javaScript 定义了四种原始数据类型</h3>
+
+除此之外，Javacript中的一切都是“对象（object）”
+<ul>
+    <li>- string</li>
+    <li>- number</li>
+    <li>- boolean</li>
+    <li>- undefined</li>
+</ul>
+
+<h3>
+    Javascript 是一种“动态类型”的编程语言。
+</h3>
+<p>同一个变量可以接收不同类型的数值</p>
+
+<h3>数值类型的转换</h3>
+<p>我们可以使用：parseInt() parseFloat()方法将一个<b>对象</b>转换为数值类型
+    将一个对象转换成为数值类型</p>
+
+<h3>运算符：“=”</h3>
+<table>
+    <tbody>
+    <tr><th>运算符</th><th>含义</th></tr>
+    <tr><td>=</td><td>赋值运算符</td></tr>
+    <tr><td>==</td><td>判等运算符</td></tr>
+    <tr><td>===</td><td>严格判等运算符</td></tr>
+    </tbody>
+</table>
+<p><b>“严格判等运算符：内容相同，类型相同”</b></p>
+<p><b>“普通判等运算符：两个对象经过类型转换后值相等就可以了”</b></p>
+
+
+<h3>null 与 undefined 区别</h3>
+<p>undefined 表示变量还被定义</p>
+<p>null 表示nothing ：某变量不引用任何对象</p>
+<p>* 如果用“==”判断，则null被认为与"undefined"相同</p>
+</body>
+
+<script type="text/javascript">
+    var number = 100;
+    console.info(typeof number); //number
+
+    var str = "hello"
+    console.info(typeof str);//string
+
+    var isTrue = true;
+    console.info(typeof isTrue);//boolean
+
+    var undef;
+    console.info(typeof undef);//undefined
+
+    var arr = [0];
+    console.info(typeof arr);//object
+
+    console.info(arr instanceof Array);//true
+
+    console.info(arr instanceof Object);//true
+
+    /*----------------------------------------*/
+    var value = 100;
+    value = "一百";
+    value = false;
+
+    /*----------------------------------------*/
+
+    var num1 = parseInt("34",10); //34 第二个参数表明使用10进制
+    var num2 = parseInt("34s5b",10)//34 s之后的字符被忽略
+    var num3 = parseInt("s",10)//NaN:not a number
+    var num4 = parseInt(3.14,10)//3，向下取整
+
+    /*-------------------------------------------*/
+
+    var x = 43;
+    var y = "43";
+
+    console.info(x === y);
+    console.info(x == y);
+
+    /*-------------------------------------------*/
+    var obj = null;
+    if (obj === null){
+        console.info("jbj === null");
+    } else {
+        alert("obj != null");
+    }
+    console.info(typeof obj); //null 自己也是一个对象，其类型为object
+    /*-------------------------------------------*/
+    var myVar;
+    var myVar2;
+    console.info(myVar == myVar2); //true
+    console.info(myVar === myVar2); //false
+
+
+</script>
+</html>

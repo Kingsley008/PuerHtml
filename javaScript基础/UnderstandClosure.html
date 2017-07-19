@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>函数闭包基础</h2>
+    <script>
+        function one() {
+            console.info('one');
+            return function () {
+                console.info('two');
+            };
+        };
+
+        var returnedFunc = one ();
+        returnedFunc();
+        //得到同样的结果
+        one()();
+
+        /*内部函数调用外部变量*/
+        function  outer() {
+            var value = 100;
+            return function () {
+                console.info(value);
+            };
+        };
+        // result变量指向内部函数的同时，保留了函数引用的外部变量
+        //闭包：一个函数如果访问了外部函数定义的变量或者参数，
+        //当这个函数运行的时候，总能访问到他需要获取的那个变量或者是参数的取值，即使外部函数已经运行结束
+        var result = outer();
+        result();
+        /*例1*/
+        var counter = function () {
+            var count = 0;
+            return function () {
+                count ++;
+                return count;
+            };
+        };
+        var next = counter();
+        for (var i = 0; i < 5; i++){
+            console.info(next()); //1 2 3 4 5
+        }
+
+        /*例2*/
+        var transform = function () {
+            //第一次引用
+            console.info("擎天柱：：");
+            transform = function () {
+                //第二次调用 改变了 transform 引用的函数
+                console.info("霸天虎：：");
+            }
+        }
+        transform();//调用后 指针就指向 另一个函数了
+        transform();
+        /*闭包中的this*/
+        var example = function () {
+            var info = "example function";
+            var innerFunc = function () {
+                console.info("in innerFunc()",this)
+            }
+            var func = function () {
+                console.info("in func:", this);
+                //func 与 innerFunc 成为一个闭包后：上下文变成了window对象
+                //在调用innerFunc的时候上下文环境切换了
+                innerFunc.call(this);
+            };
+
+            return {
+               info:"anonymous object",
+                do:func
+            };
+        }
+        var obj = example();
+        obj.do(); // func -- > this anonymous  innerfunc --->this window
+
+        /*级联调用*/
+
+        //定义一个构造方法
+        var Calc = function (start) {
+            this.info = "支持级联调用";
+
+            this.add = function (x) {
+                console.info("+"+this);
+                start = start + x;
+                return this; //返回对象支持级联调用
+            };
+            this.multiply = function (x) {
+                start = start * x;
+                return this;
+            };
+
+            this.equals = function (callback) {
+                callback(start);
+                return this;
+            }
+        }
+        new Calc(100).add(10).multiply(2).equals(function (result) {
+            console.info(result);
+        });
+
+    </script>
+
+</body>
+</html>

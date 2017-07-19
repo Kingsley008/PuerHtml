@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>javascript函数基础</h2>
+<script type="text/javascript">
+    /*命名函数：全局,调用命名函数时，定义前后都可以调用*/
+    function  add(x,y) {
+        return x + y ;
+    }
+    var result = add (100, 200);
+
+    console.info(result);
+
+    /*匿名函数：先定义，再使用*/
+    var square = function (x) {
+        return x * x;
+    }
+    //变量引用：匿名函数
+    console.info(square(10));
+
+
+    /*匿名函数：立即执行用法*/
+    console.info(
+        function (x,y) {
+            return x+y;
+        }(100,200)
+    );
+
+    /*函数调用需要注意的地方*/
+    function  fuc () {
+        //注意：return语句后面不能加回车
+        //不然会被游览器解析时自动加分号，或者先定义一个变量，将变量返回
+        var person = {
+            name:"Kingsley"
+        };
+        return person;
+    }
+    console.info(fuc());
+
+    /*变量引用可以指向函数*/
+    var other = fuc; //函数名
+    console.info(other === fuc); //true
+
+    /*在一个函数内 定义另一个函数*/
+    function outerFunc(a,b) {
+        function inner(x) {
+            return x * x;
+        }
+        return Math.sqrt(inner(a) + inner(b));//a的平方 + b的平方---> 开平方根
+    }
+    console.info(outerFunc(3,4)); //5
+    /*函数外部变量引用与立即执行*/
+
+    (function OuterFunc2(arg) {
+        var number = 100;
+        (function InnerFunc2(){
+            number++;
+            console.info(arg+":"+number)
+        })()
+    })("hello")
+
+    /*函数的返回：可以返回外部函数*/
+    function funcReturnFunc(x, y) {
+        var value = 100;
+        //注意调用后返回的是一个函数，并不会执行
+        //所以要加上立即执行的()
+        return function () {
+            return value + x + y;
+        }
+    }
+    console.info(funcReturnFunc(100,200)());
+
+</script>
+</body>
+</html>

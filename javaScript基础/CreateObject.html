@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h2>另类的对象创建方法</h2>
+<script>
+    /*工厂模式*/
+    function createPerson(name, age, job) {
+        var o = new Object();
+        o.name = name;
+        o.age = age;
+        o.job = job;
+        o.sayName = function () {
+            console.info(this.name); //this 引用对象自身
+        };
+        return o;
+    }
+    var person1 = createPerson('john', 29, 'software engineer');
+    var person2 = createPerson('Mary', 40, 'doctor');
+    person1.sayName();
+    person2.sayName();
+    /*构造函数*/
+    function Person(name, age, job) {
+        //this,引用的是新建的对象，下面的P1 P2
+        //var this = { } 省略
+        this.name = name ;
+        this.age = age;
+        this.job = job;
+        this.sayName =  function () {
+            console.info(this.name);
+        };
+        //return this 省略
+    };
+    /*如果没有new关键字,当普通函数调用，this指向全局对象window*/
+    var p1 = new Person('john', 29, 'software engineer');
+    var p2 = new Person('Mary', 40, 'doctor');
+    /*检查构造器*/
+    console.info(p1.constructor === Person); //true
+    console.info(Person.constructor === Object) //true
+    /*使用instanceof 判断 是否使用new关键字*/
+    function TestArgrmentsCallee() {
+        console.info(this);//上下文环境
+        console.info(this instanceof TestArgrmentsCallee);
+        console.info(this instanceof arguments.callee);  //前后两句等价 判断上下文环境 得到false 说明没加new
+    }
+    TestArgrmentsCallee();//false
+    new TestArgrmentsCallee();//true
+    /*构造函数的编写模版, 先判断是否有new关键字*/
+    function MyObject(value) {
+        if(this instanceof arguments.callee != true){
+            return new MyObject(value);
+        }
+        this.prop = value;
+    }
+    var obj1 = new MyObject(100);
+    var obj2 = MyObject(200);
+
+    /*使用原型构造对象*/
+    function Point(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+    Point.prototype.move = function (stepx,stepy) {
+        this.x = this.x + stepx;
+        this.y = this.y + stepy;
+    };
+    var point = new Point(1,2);
+    point.move(1,1);
+    console.info(point);
+
+</script>
+
+</body>
+</html>

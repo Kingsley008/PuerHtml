@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>对象基础</h3>
+
+<script>
+    /*第一种创建对象的方式:创建一个空对象，再加入属性*/
+    var myObject = {};
+    myObject.name = "wy";
+    myObject.age = 40;
+    /*自变量的方式创建对象*/
+    var person = {
+        "name":"wy",
+        "age":20,
+    };
+    var exampleObj = {
+        info:"information",
+        inner:{
+            id:0,
+            value:100
+        },
+        arr:[1,2,3],
+
+        sayHello: function (name) {
+            console.info("Hello," + name + "!");
+        },
+    };
+    /*对象属性的访问*/
+    console.info(exampleObj.info);
+    console.info(exampleObj.inner.value);
+    console.info(exampleObj.arr[1]);
+    console.info(exampleObj.notExist || 'default value')
+    exampleObj.sayHello('king');
+    //等价
+    console.info(exampleObj['info']);
+
+    /*遍历对象的属性*/
+    for (var proName in exampleObj) {
+        console.info(proName + "  type:" +
+            (typeof  exampleObj[proName]));
+    }
+    /*对象的CRUD*/
+    delete exampleObj.info;
+    console.info(exampleObj.info);//undefined
+    delete exampleObj.sayHello
+    console.info(exampleObj.sayHello === undefined);
+
+    //a() && b() :如果执行a()后返回true，则执行b()并返回b的值；如果执行a()后返回false，则整个表达式返回a()的值，b()不执行；
+
+    //当sayHello为undefined--false,短路不会再执行后面的语句
+    exampleObj.sayHello && exampleObj.sayHello('wy');
+
+    /*对象作为函数的参数*/
+    //a() || b() :如果执行a()后返回true，则整个表达式返回a()的值，b()不执行；如果执行a()后返回false，则执行b()并返回b()的值；
+    function displayPerson(person) {
+        console.info('name='+(person.name || 'no name'));
+        console.info('age=' + (person.age || 0));
+    }
+    displayPerson(person);  //输出person对象的属性
+    displayPerson({}); //输出默认
+</script>
+
+</body>
+</html>

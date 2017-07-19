@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文本和对齐方式</title>
+    <style>
+        body{
+            width: 100%;
+        }
+
+        .bk{
+            margin: 0 auto;
+            width: 200px;
+            height: 200px;
+            border: 2px solid greenyellow ;
+            padding: 10px 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 3px 3px 5px 2px,inset 0px 0px 5px red;
+        }
+        p:first-child{
+            background-color: #999999;
+            font:16px/20px 微软雅黑;
+            margin: 10px 20px;
+            text-align:left;
+            text-indent: 2em;
+            /*white-space: nowrap; 不留空格 强制不换行*/
+            /*white-space: pre; 留空格，代码不换行就不换行*/
+            white-space: pre-wrap;/*留空格并且自动换行；用的多*/
+            word-wrap: break-word;/*任意字母间都可以换行*/
+            border-radius: 20px;
+        }
+        p:last-child{
+            background-color: #999999;
+            font:12px/14px 宋体;
+            text-align: left;
+            margin: 10px;
+/*            text-shadow: 1px 2px 3px red;
+            text-decoration: line-through blue;*/
+            
+            white-space: nowrap; /*强制不换行*/
+            text-overflow: ellipsis; /*文本省略用省略号代替*/
+            overflow: hidden;/*溢出*/
+
+            cursor: pointer ; /*鼠标变成小手*/
+            /*cursor: help; 问号效果
+                      zoom-in:放大镜效果
+                      move:移动元素
+                      url(xx.cur) 自定义
+                      */
+        }
+    </style>
+</head>
+<body>
+<div class="bk">
+    <p>微软雅黑 16px 行高20px 居中对齐
+p:last-child{
+        background-color: #999999;
+        font:12px/14px 宋体;
+        text-align: left;
+        }</p>
+
+    <p title="宋体 12px 行高14px 左对齐 字符溢出省略">宋体 12px 行高14px 左对齐 字符溢出省略</p>
+</div>
+
+<p style="margin-bottom: 30px;">这个段落的下外边距被合并...</p>
+<p style="margin-top: 20px;">...这个段落的上外边距被合并。</p>
+
+</body>
+</html>

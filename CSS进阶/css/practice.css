@@ -1,0 +1,229 @@
+a{
+    text-decoration: none;
+    color: #888888;
+}
+h3,h4{
+    margin: 0px;
+}
+a:visited{
+    text-decoration:none;
+}
+body{
+    background-color: #f5f5f5;
+    color: #333333;
+    margin: 0px;
+    padding: 0px;
+}
+.content{
+    border:1px solid #d3d3d3;
+    background-color: white;
+    width: 982px;
+    margin: 0 auto;
+    position: relative;
+    height: 100%;
+}
+.nav{
+    margin:41px;
+    font-size: 12px;
+    font-family: 宋体;
+    color: #888888;
+
+}
+
+h2{
+    font-family:微软雅黑;
+    font-size: 24px;
+    color: #333333;
+}
+
+.newTV h3{
+    font-size: 14px;
+    font-family: 宋体;
+    color: #333333;
+    height: 60px;
+    line-height: 60px;
+    overflow: hidden;
+}
+
+.hotTV h3 a {
+    display: inline-block;
+    font-size: 16px;
+    font-family: 宋体;
+    color: #333333;
+    display: inline-block;
+    vertical-align: middle;
+}
+.link a{
+    font-size: 12px;
+    color: #999999;
+}
+p{
+    font-size: 14px;
+    font-family: 宋体;
+    color: #999999;
+}
+h3 + a{
+    font-size: 12px;
+    font-family: 宋体;
+    color: #666666;
+}
+.hotTV p{
+    font-size: 12px;
+    font-family: 宋体;
+    color: #999999;
+}
+/*先统一设置背景图片的大小*/
+.nav ul li a::before{
+    content: ""; /*一定要写即使只是加图片*/
+    width: 39px;
+    height: 40px;
+    display: block;/*block 块级元素 前后带换行*/
+    background:url("../img/sprite1.png") 0px 0px no-repeat ;
+}
+.nav ul li.mxzb.selected a::before{
+    background-position:-40px 0px;
+}
+
+/*加一个class属性*/
+.nav ul li.yygs.selected a::before{
+      background-position:-40px -40px;
+  }
+.nav ul li.qgyz a::before{
+    background-position:0 -80px;
+}
+.nav ul li.ylbg a::before{
+    background-position:0 -120px;
+}
+.nav ul li.gbj a::before{
+    background-position:0 -160px;
+}
+.nav ul li.tkx a::before{
+    background-position:0 -200px;
+}
+.nav ul li.xsqy a::before{
+    background-position:0 -240px;
+}
+.nav ul li.ysdw a::before{
+    background-position:0 -280px;
+}
+.nav ul li.rwls a::before{
+    background-position:0 -320px;
+}
+.nav ul li.lzlt a::before{
+    background-position:0 -360px;
+}
+.nav ul li.wy a::before{
+    background-position:0 -400px;
+}
+.nav ul li.et a::before{
+    background-position:0 -440px;
+}
+.nav ul li.dm a::before{
+    background-position:-1px -480px;
+}
+.nav ul li.fc a::before{
+    background-position:0 -520px;
+}
+.nav ul li.yszb a::before{
+    background-position:0 -560px;
+}
+.nav ul li:hover{
+    background-color:#f6f7f7;
+}
+.nav ul{
+
+}
+.nav ul li {
+    display: inline-block;
+    width: 48px;
+    height: 52px;
+    margin-right: 50px;
+    margin-top: 45px;
+    text-align: center;
+}
+
+.author::after{
+     content: "";
+     width: 20px;
+     height:20px;
+     display: inline-block;
+     position: relative;
+     top: 5px;
+     background: url("../img/sprite2.png") 0 0;
+ }
+.author::before{
+    content: "";
+    width: 20px;
+    height:20px;
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    background: url("../img/sprite2.png") 0 -20px;
+}
+.newTV{
+    margin: 0px 41px;
+}
+.newTV ul{
+    padding: 0;
+    list-style-type: none;
+}
+.newTV ul li img{
+    width: 150px;
+    height: 150px;
+}
+.newTV ul li {
+    display: inline-block;
+    margin-top: 20px;
+    margin-right: 30px;
+    width: 150px;
+    height: 220px;
+
+}
+.newTV ul li:last-child {
+    margin-right: 0px;
+}
+
+.hotTV{
+    word-wrap:break-word;
+    word-break:break-all;
+    margin: 0px 41px;
+}
+.hotTV  ul li{
+    border-top: 1px solid #e7e7e7;
+    padding-top: 19px;
+    display: inline-block;
+    width: 420px;
+    margin-top: 20px;
+}
+
+
+.hotTV ul li img{
+    width: 120px;
+    height: 120px;
+}
+
+.link ul li {
+    display: inline;
+    border-top: none;
+}
+.link{
+    position: relative;
+    left: 750px;
+}
+.link span{
+    color: #999999;
+}
+.title{
+    border-bottom: 2px darkred solid;
+}
+
+.aside{
+    float: right;
+    width: 295px;
+}
+.author :last-of-type p{
+    display: inline-block;
+}
+.aside a:hover{
+    text-decoration: underline;
+}

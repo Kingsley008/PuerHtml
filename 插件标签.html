@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>插件&热点图</title>
+</head>
+<body>
+    <h2>Object 嵌入flash 插件</h2>
+    <object type="application/x-shockwave-flash">
+        <param name="movie" value="http://pdfReader.swf">
+        <param name="flashvars" value="http://book.pdf">
+    </object>
+    <h2>embed嵌入插件</h2>
+    <embed width="640" height="480" type="application/x-shockwave-flash" src="http://pdfReader.swf">
+
+    </embed>
+
+    <video controls = "controls" poster="img/QQ截图20170711141648.png">
+        <source src = "movie.mp4" type="video/mp4">
+        <source src="movie.webm">
+        <source src="movie.ogg">
+        <track kind="subtitles" src="video.srt" label="English">
+        您的游览器不支持video标签
+    </video><br>
+    <h2>热力图，点击途中不同的位置，跳转到不同的页面</h2>
+    <img src="img/QQ截图20170711141648.png" alt="png24" width="40" height="40" usemap="#Map">
+    <map  name="Map" id = "Map">
+        <area shape="rect" coords ="0, 0, 110,110" href="http://www.google.com"target="_blank">
+    </map>
+</body>
+</html>

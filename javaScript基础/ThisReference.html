@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>函数执行上下文</h3>
+<h4 id="output"></h4>
+<script>
+    var obj = {
+        func: function () {
+            console.info("in func(); this = " + this);
+        }
+    };
+    //如果这个函数是归属于某个对象的话，那么调用的时候，函数的上下文就是这个对象
+    obj.func(); // this --> Object
+    var ref = obj.func;
+    ref(); //通过变量调用函数  this --> window
+
+    /*call:动态指定函数运行时的上下文*/
+    window.color  = "red";
+    var obj = {
+        color : "blue"
+    };
+    function  sayColor() {
+        console.info(this, this.color);
+    }
+    sayColor.call(window); //第一个参数 this argument 运行时的上下文环境
+    //调用了obj定义的color
+    sayColor.call(obj);
+
+    /*apply:动态指定函数运行时的上下文*/
+    var person = {
+        name:'kingsley',
+    }
+    var say = function (message) {
+        console.info((this.name || '无名氏') +　"说：“"
+        + (message || '我什么也不想说了')+"”。");
+    }
+    window.name = "唐僧";
+    //apply 第一个参数上下文  第二个参数
+    say.apply(person,["呵呵，今天天气很好..."]);// 上下文person,传入参数
+    say.apply(null, ["悟空，你说"]); //name的上下文 window.name
+    //kingsley说：“呵呵，今天天气很好...”。
+    //唐僧说：“悟空，你说”。
+
+    /*回调函数的上下文对象*/
+
+    var outputElem = document.getElementById('output');
+
+    function showTime() {
+        console.info(this);
+        if (!! outputElem) {
+            outputElem.innerHTML =
+                new Date().toLocaleString();
+        }
+    }
+
+    //默认情况下：回调函数和调用函数的上下文环境相同
+    //setInterval的上下文为window
+    //setInterval(showTime, 1000);
+
+    /*使用bind修改回调函数上下文环境*/
+    var obj = {
+         outputElem2: document.getElementById('output'),
+         showTime2:function(){
+            console.info(this);
+            //如果不进行绑定：上下文为window 取不到obj中的outputElem2 无法打印
+            if (!! this.outputElem2) {
+                this.outputElem2.innerHTML =
+                    new Date().toLocaleString();
+            }
+        }
+    };
+
+    setInterval(obj.showTime2.bind(obj), 1000);
+
+
+</script>
+</body>
+</html>

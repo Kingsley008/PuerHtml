@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数参数&arguments对象</title>
+</head>
+<body>
+  <h2>函数参数&arguments对象</h2>
+
+  <button id="btnClick">Click me !</button>
+  <input type="text" id="result"/>
+
+  <script>
+   var button = document.getElementById("btnClick");
+   var result = document.getElementById("result");
+   var clickCount = 0;
+   button.addEventListener('click',function () {
+       clickCount++;
+       result.setAttribute('value',clickCount+"hello world");
+   });
+
+  </script>
+
+
+    <script>
+        function add(num1, num2) {
+            return num1 + num2;
+        }
+        console.info(add(1, 2));//3
+        console.info(add(1, "2"));//12 隐式转换成string
+        console.info(add(1,2,3));//3 自动忽略第三个参数
+        console.info(add(3));//NaN
+
+
+        /*判断参数是否为空，如果为空 = undefined */
+        function say(name, message) {
+            if (message === undefined){
+                message = " no message";
+            }
+            console.log(name + ":" + message);
+        }
+        say("king","hello");
+        say("king");
+
+        /* arguments 对象的应用*/
+
+        function sumNUmbers() {
+            var result = 0;
+            for (var i = 0; i < arguments.length; i++) {
+                result += arguments[i];
+            }
+            return result;
+        }
+        console.log(sumNUmbers(1,2,3));//6  -- argument.length 得到实际传入的参数个数
+
+        /*function.length 与 arguments区别*/
+
+        function sayName(name) {
+            console.info(name);
+        }
+        function sum(num1, num2) {
+            return num1 + num2;
+        }
+        function sayHi() {
+            console.info("hi");
+        }
+        console.info(sayName.length);//1 定义的形参的个数
+        console.info(sum.length);//2
+        console.info(sayHi.length);//0
+
+        /*函数接收函数参数*/
+        function callSomeFunction(func,argu) {
+            return func(argu);
+        }
+        function getGreeting(name) {
+            return "hello," + name;
+        }
+        console.info(callSomeFunction(getGreeting,"king"));
+
+        /*使用匿名函数的引用变量，调用另一个函数*/
+
+        //函数代码 作为另外一个函数的参数
+        var callTwice = function (otherFunc) {
+            otherFunc();
+            otherFunc();
+        }
+        callTwice(function () {
+            console.info("this is a function");
+        })
+
+    </script>
+</body>
+</html>

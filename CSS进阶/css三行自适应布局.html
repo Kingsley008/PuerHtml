@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .head{
+            height: 50px;
+            width: 70%;
+            position: absolute;
+            top: 0;
+            left: 15%;
+            right: 15%;
+            background: rosybrown;
+        }
+        .content{
+            position: absolute;
+            top:50px;
+            left: 15%;
+            right: 15%;
+            bottom: 50px;
+            overflow: auto; /*超出，滚动内容*/
+        }
+        .textclear{
+            height: 3000px;
+        }
+        .foot{
+            height: 50px;
+            width: 70%;
+            position: absolute;
+            bottom: 0;
+            left: 15%;
+            right: 15%;
+            background: royalblue;
+        }
+        .main2{
+            border: 1px red solid;
+            float: left;
+        }
+        .aside{
+            border: 1px yellow solid;
+            float: left;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+    <div class="head"> head</div>
+    <div class="content">
+        <div class="textclear">
+        <div class="main2">
+            main
+        </div>
+        <div class="aside">
+            aside
+        </div>
+        </div>
+    </div>
+    <div class="foot">foot</div>
+    </div>
+</body>
+</html>

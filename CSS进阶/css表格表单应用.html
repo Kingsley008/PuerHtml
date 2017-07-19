@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css表格表单应用</title>
+    <style>
+        tr:nth-child(even){
+            color: darkgray;
+        }
+        /*选中第一个每一个父亲元素中的第一个tr标签*/
+        th:first-child{
+            color: red;
+        }
+        /*input 表单相关的伪装类*/
+        input:disabled {
+            color: darkgoldenrod;
+        }
+        input:checked{
+            height: 50px;
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+<!-- rowspan  colspan 实现跨行的效果-->
+<table border="1">
+    <caption>运费详情</caption>
+    <thead><tr><th>区域</th><th>寄达地</th><th>首重</th><th>续重</th></tr></thead>
+
+    <tbody>
+    <tr><th rowspan="2">一区</th><td>xxxxxxxxxx</td><td>2</td><td>3</td></tr>
+    <td>xxxxxxxxxxxxx</td><td>12</td><td>12</td>
+
+    <tr><th>二区</th><td>xxxxxxxxxx</td><td>2</td><td>3</td></tr>
+    <tr><th>二区</th><td>xxxxxxxxxx</td><td>2</td><td>3</td></tr>
+    <tr><th>二区</th><td>xxxxxxxxxx</td><td>2</td><td>3</td></tr>
+    <tr><th>二区</th><td>xxxxxxxxxx</td><td>2</td><td>3</td></tr>
+    </tbody>
+</table>
+
+<form action="/login" method="post">
+    <fieldset>
+        <legend>照片选择</legend>
+        选择照片 <input type="file" name = "file">
+    </fieldset>
+
+    <fieldset>综合设置
+        <div>选择尺寸：
+            <input id = "cb_0" type="checkbox" name = "size" value="5"  checked="checked">
+            <label for="cb_0">5寸</label>
+            <input  id = "cb_1" type="checkbox" name = "size" value="6">
+            <label for="cb_1">6寸</label>
+        </div>
+        <div>选择相纸：
+            <input  id ="xz_1" type="radio" name="material" value="fushi">
+            <label for="xz_1">富士</label>
+            <input id="xz_2" type="radio" name="material" value="keda">
+            <label for="xz_2">柯达</label>
+        </div>
+        <div>
+            配送方式：
+            <select>
+                <option value="EMS">EMS</option>
+                <option value="shunfeng" selected>顺丰</option>
+            </select>
+        </div>
+        <div>
+            商品描述：<input type="text" name="description" placeholder="write something" disabled>
+        </div>
+        <br>
+        <div>
+            意见反馈：<textarea rows="3" cols="23"  ></textarea>
+        </div>
+        <div>
+            <input type="submit">
+            <input type="reset">
+        </div>
+    </fieldset>
+</form>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>String native Function</title>
+</head>
+<body>
+<script>
+    /*得到字符串长度*/
+    "micromajor".length  // 10
+    /*得到第n个字符,下标从0开始，没有为空串*/
+    "micromajor".charAt(0)   // "m"
+    "micromajor".charAt(100) // ""
+    /*得到具体一个字符的索引位置，-1表示不存在*/
+    "micro-major".indexOf("-")     // 5
+    "micro-major-web".indexOf("-") // 5
+    "micro-major".indexOf("major") // 6
+    "micromajor".indexOf("-")      // -1
+
+    "micromajor163".search(/[0-9]/) // 10
+    "micromajor163".search(/[A-Z]/) // -1
+
+    "micromajor163".match(/[0-9]/) // ["1"]
+    "micromajor163".match(/[0-9]/g)// ["1","6","3"]
+    "micromajor163".match(/[A-Z]/) // null
+
+    "micromajor163".replace("163","###")  // "micromajor###"
+    "micromajor163".replace(/[0-9]/,"#")  // "micromajor#63"
+    "micromajor163".replace(/[0-9]/g,"#") // "micromajor###"
+    "micromajor163".replace(/[0-9]/g,"")  // "micromajor"
+
+     /*截取字符串 5取得到 7取不到 第二个参数不填 截到尾*/
+    "micromajor".substring(5,7)  // "ma"
+    "micromajor".substring(5)    // "major"
+
+    "micromajor".slice(5,7)   // "ma"
+    "micromajor".slice(5)     // "major"
+    "micromajor".slice(1,-1)  // "icromajo"
+    "micromajor".slice(-3)    // "jor"
+
+    "micromajor".substr(5,2)  // "ma"
+    "micromajor".substr(5)    // "major"
+
+    /*格式化 成数组*/
+    "micro major".split(" ")     // ["micro","major"]
+    "micro major".split(" ",1)   // ["micro"]
+    "micro2major".split(/[0-9]/) // ["micro","major"]
+     /*大小写的转变*/
+    "MicroMajor".toLowerCase()  // "micromajor"
+
+    "MicroMajor".toUpperCase()  // "MICROMAJOR"
+    /*字符串 连接*/
+    "0571" + "-" + "88888888"  // "0571-88888888"
+
+    String(163)  // "163"
+    String(null) // "null"
+    /*转义符   \t 够格 */
+    "micro\"major"  // "micro"major"
+    "micro\\major"  // "micro\major"
+    "micro\tmajor"  // "micro	major"
+</script>
+
+</body>
+</html>

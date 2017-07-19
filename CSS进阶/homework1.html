@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>homework</title>
+    <style>
+        body,html{
+            width: 100%;
+        }
+        .parent{
+            width: 100%;
+            display: flex;
+        }
+        .side {
+            display: flex;
+            flex:0 1 200px;
+            height: 200px;
+            background-color: red;
+            margin-right: 10px;
+            justify-content: center;
+            align-items: center;
+            color: whitesmoke;
+        }
+        .main{
+            display: flex;
+            flex: 1 1 0;
+            height: 200px;
+            background-color: blue;
+            justify-content: center;
+            align-items: center;
+            color: whitesmoke;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="side">
+            <div>侧栏</div>
+        </div>
+        <div class="main">
+            <div>主栏</div>
+        </div>
+    </div>
+</body>
+</html>

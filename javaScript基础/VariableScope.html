@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作用域</title>
+</head>
+<body>
+<h3>变量的作用域</h3>
+<p>不管你在函数的哪个部分定义变量并给它赋值，JavaScript都会把变量的声明“移到”函数开头进行统一的处理，不注意这点，可能会引入比较难发现的BUG。
+    由此得到一个编程规范：在函数开头集中进行变量声明和初始化。</p>
+<script>
+    var color = "dark"
+    function doSomthing(doIt) {
+        var color = "blue";
+        if (doIt){
+            var color = "red"
+            console.info("在if条件语句中的Color=" + color);
+        }
+        console.info("在if条件外的Color = " + color);
+    }
+    console.info("全局变量中的" + color);
+    doSomthing(true);
+    //测试:输出两个red
+    //说明javascript中没有块作用域的概念，在函数内部定义的所有的变量
+    //在一个函数里：相同变量名实际上是一个变量，指向同一个内存，而不会新开辟一个内存空间
+    //在函数体内可以屏蔽外部同名变量的值，但是如果没有var 那么会修改全局变量的值
+
+
+    /*变量提升 hoist*/
+    var x = "hello"
+    function sayHi() {
+        console.info(x); //输出 undefined
+        var x = "world"
+
+        /*上面的代码 等价于*/
+        // var x;
+        // console.info(x);
+        // x = "world";
+    }
+
+    /*内部函数访问外围变量*/
+    var world = "world ";
+    function sayHello() {
+        var hello = "hello ";
+       //！ console.info(info); 外部函数 无法读取内部函数的变量
+        (function  inner() {
+            var info = "in inner function"
+            console.info(hello+world+info);
+        })()
+    }
+    sayHello();
+
+    /*变量的查找过程:当在一个函数中出现一个本函数中没有定义的标识符时，
+    JavaScript会顺着一个”链条“去上层函数中搜索,如果没有找到，定义为undefined*/
+    function outer() {
+        var color = "blue"; //第二层查找， 最后去window全局查找color这个变量
+        function getColor() {
+            return color;
+        }
+        console.info(getColor()); //输出dark
+    }
+    outer();
+
+</script>
+</body>
+</html>

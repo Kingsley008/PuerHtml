@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Json</title>
+</head>
+<body>
+
+</body>
+    <script>
+        /*JavaScript Object Notation 用js对象的格式 表示数据*/
+        /*属性引号 最后一个没有逗号*/
+        /*JSON.pare(text)  JSON - JS*/
+        var userJson = '{\
+        "id":1,\
+        "nick": "abc",\
+        "avatar":"1.jpg",\
+        "tags":null,\
+        "authed":false\
+        }'
+        var user = JSON.parse(userJson);
+        /*第二个参数在转换成对象之前做一些处理*/
+        var user = Json.parse(userJson,function (k, v) {
+            if(k === 'avatar'){
+                return 'http://music.163.com/img/'+v;
+            }
+            return v;
+        })
+        /*兼容IE6*/
+        if(!window.JSON){
+            window.JSON ={
+                parse: function (sJSON) {
+                    return eval('(' + sJSON + ')');
+                }
+            };
+        }
+
+        /*JS转JSON  JSON.stringify 序列化*/
+        var user = {
+            id: 1,
+            nick:"abc",
+            avatar:"1.jpg",
+            tags:null,
+            authed:false
+        }
+        var userJ  = JSON.stringify(user);
+        /*当我们只想在一个对象里挑出一部分属性进行序列化的时候*/
+        var userJ2 = JSON.stringify(user,['id', 'nick','avatar']);
+
+        /*兼容IE6*/
+        if (!window.JSON) {
+            window.JSON = {
+                stringify: function (obj) {
+                    var result = "";
+                    for (var key in obj) {
+                        if (typeof obj[key] === "string") {
+                            // 如果属性值是String类型，属性值需要加上双引号
+                            result += "\"" + key + "\":\"" + obj[key] + "\",";
+                        } else if (obj[key] instanceof RegExp) {
+                         // 如果属性是正则表达式，属性值只保留一对空大括号{}
+                            result += "\"" + key + "\":{},";
+                        } else if (typeof obj[key] === "undefined" || obj[key] instanceof Function) {
+                        // 如果属性值是undefined, 该属性被忽略。忽略方法。
+                        } else if (obj[key] instanceof Array) {
+                            // 如果属性值是数组
+                            result += "\"" + key + "\":[";
+                            var arr = obj[key];
+                            for (var item in arr) {
+                                if (typeof arr[item] === "string") {
+                        // 如果数组项是String类型，需要加上双引号
+                                    result += "\"" + arr[item] + "\",";
+                                } else if (arr[item] instanceof RegExp) {
+                        // 如果属数组项是正则表达式，只保留一对空大括号{}
+                                    result += "{},";
+                                } else if (typeof arr[item] === "undefined" || arr[item] instanceof Function) {
+                        // 如果数组项是undefined, 则显示null。如果是函数，则显示null?。
+                                    result += null + ",";
+                                } else if (arr[item] instanceof Object) {
+                        //如果数组项是对象(非正则，非函数，非null)，调用本函数处理
+                                    result += this.stringify(arr[item]) + ",";
+                                } else {
+                                    result += arr[item] + ",";
+                                }
+                            }
+                            result = result.slice(0, -1) + "],"
+
+                        } else if (obj[key] instanceof Object) {
+                            // 如果属性值是对象(非null，非函数，非正则)，调用本函数处理
+                            result += "\"" + key + "\":" + this.stringify(obj[key]) + ",";
+                        } else {
+                            result += "\"" + key + "\":" + obj[key] + ",";
+                        }
+                    }
+                    // 去除最后一个逗号,两边加{}
+                    return "{" + result.slice(0, -1) + "}";
+                }
+            };
+        }
+    </script>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现一个弹窗</title>
+    <style>
+        body{
+            margin: 0px;
+        }
+        .window{
+            z-index: 1000;
+            background-color: white;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            border-radius: 3px;
+            width: 300px;
+            border: 1px solid black;
+            height:200px;
+/*            margin: -100px 0 0 -150px ; !*高度减一半  宽度减一半*!*/
+            transform: translate(-50%,-50%);
+        }
+        .title{
+            padding: 0 20px;
+            height: 40px;
+            background-color: #eeeeee;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow:ellipsis;
+            font:14px 微软雅黑;
+        }
+        .title p {
+            display: inline-block;
+            width: 40px;
+        }
+
+        .cancel{
+            float: right;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .content{
+            font: 12px/1.5em 宋体;
+            margin:20px;
+            background-color: white;
+
+        }
+        .sure{
+            display: block;
+            position: absolute;
+            width: 80px;
+            height: 30px;
+            background-color: cornflowerblue;
+            left: 50%;
+            bottom: 20px;
+            border: none;
+            color: white;
+            padding: 0;
+            margin: 0 0 0 -40px;
+            border-radius: 5px;
+        }
+        .mask{
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color:cornflowerblue;
+            /*设置半透明*/
+            z-index: 999;
+            filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6;
+        }
+
+    </style>
+</head>
+<body>
+<div class="mask"></div>
+    <div class="window">
+        <div class="title">
+            <p>标题栏xxx</p>
+            <button class="cancel">X</button>
+        </div>
+        <div class="content">段落内容
+        </div>
+        <button class="sure">确定</button>
+    </div>
+</body>
+</html>

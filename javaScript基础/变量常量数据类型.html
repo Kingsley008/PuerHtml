@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    /*typeof 能识别是 基本类型 外加一个函数 基本类型
+     instanceof 用于判断一个变量是否某个对象的实例  */
+    var num = 12;
+    var numobj = new Number(12);
+    var strobj = new String("12");
+    var str2 = "a"
+    var a;
+    var b = null;
+    console.info(typeof num);
+    console.info(strobj instanceof String);//true
+    console.info(str2 instanceof String); //false
+    console.info(typeof numobj); //object
+    console.info(numobj instanceof Number);//true
+    console.info(typeof a);
+    console.info(numobj == num); //true  == 对象自动转化成对应的原始类型
+    console.info(a === b);//false
+    console.info(num === strobj);//false
+
+</script>
+</html>

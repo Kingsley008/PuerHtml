@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Use String Func</title>
+</head>
+<body>
+<form>
+    <label for="t">姓名</label><input id="t" type="text" placeholder="输入长度小于等于6个字符>=0">
+    <button id="btn">提交</button>
+    <em>达成需求：1.文本长度检查 2.特殊非法字符检查 3.固定含有的内容检查 3.开头字符检查 4.没有问题用户输入的删除第一个字符</em>
+</form>
+
+</body>
+    <script>
+        var btn = document.getElementById("btn");
+        var name = document.getElementById("t");
+        btn.addEventListener('click',function (){
+            var nameValue = document.getElementById("t").value;
+            console.info(typeof nameValue.charAt(0));
+            if (nameValue.length >6 || nameValue.length <=0){
+                alert("姓名输入长度小于等于6个字符且大于0");
+
+            }else if(nameValue.charAt(0) == "-"){
+                alert("姓名不能以-开头");
+            }else if(nameValue.indexOf("_") == -1){
+                alert("姓名一定要包含_");
+                /*search 可用正则表达式*/
+            }else if (nameValue.search(/[0-9]/) != -1){
+                alert("姓名不能有数字")
+            }else{
+                var NewName =  nameValue.replace(nameValue.charAt(0),"");
+                document.write("去掉一个字符后的姓名：" + NewName);
+            }
+        });
+    </script>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h3>JavaScript中的数组</h3>
+
+<script>
+    /*js中的数组是“多态数组”*/
+    var arr = ["one", 2, true, function (a, b) {
+        return  a + b;
+    }, [1,2,3]];
+    console.info(arr);
+    console.info(arr.length);
+
+    /*访问数组中的内容*/
+    //通过下标访问
+    console.info(arr[0]); // one
+    //访问数组中的函数
+    console.info(arr[3](1,2)); // 3
+    //访问数组中的数组
+    console.info(arr[arr.length - 1].length); //3
+    console.info(arr[100]); //下标越界返回 undefined
+
+    /*数组的写入：自动扩容*/
+    var arr2 = [];
+    arr2[0] = "Hello";
+    console.info(arr2[0].toUpperCase());
+    //跳着赋值-- 数组自动增长
+    arr2[3] = 3;
+    console.info(arr2.length);
+    console.info(arr2);
+    /*在尾部追加*/
+    var arr3 = [];
+    for (var i = 0; i < 5; i++){
+        arr3[arr3.length] = i;
+    }
+    console.info(arr3);//0 1 2 3 4
+
+    /*数组的拼接*/
+    //将两个数组首尾相接
+    var left = [1, 2, 3];
+    var right = [4, 5, 6];
+    console.info(left.concat(right));//123456
+
+    var words = ["锤子", "剪刀", "布"];
+
+    var result = words.join('<--->');//输出一个字符串
+    //锤子 <--> 剪刀 <--> 布
+    console.info(result);
+
+
+    /* JavaScript数组可以当成堆栈使用，
+    * 拥有pop()和push()两个方法，
+    **/
+
+    var stack = [2, 3, 4];
+    //进栈
+    stack.push(5);//[2, 3, 4, 5]
+    //出栈
+    var value = stack.pop();
+    //value = 5
+    console.info('value = ' + value);
+
+    /* 另外，JavaScript数组也提供了shift()和unshift()之两个方法，
+     * 在数组的前部添加或移除元素。*/
+    var myArr = [2,3, 4];
+    myArr.unshift(100);
+    console.info(myArr);//[100,2,3,4]
+
+    var shifted = myArr.shift();//remove数组第一个数字 100
+    console.info(shifted);//100
+    console.info(myArr);//[2, 3, 4]
+
+    /*使用slice 提取子数组*/
+    //数组切片
+    var bigArr = [0, 1, 2, 3, 4, 5];
+    //按照区间：[起始索引值，结束索引值)提取数组元素
+    var subArr = bigArr.slice(1,4);//下标4 取不到
+    console.info(subArr);//[1,2,3]
+
+    /*移除数组元素*/
+    var exampleArr = [0, 1, 2, 3, 4, 5, 6];
+    //从位置索引2（第三个元素）开始，一共移除3个元素
+    exampleArr.splice(2,3);//[0,1,5,6]
+    console.info(exampleArr);
+    //还原
+    exampleArr = [0, 1, 2, 3, 4, 5, 6];
+    //删除第三个元素
+    delete exampleArr[2];
+    //被删除的元素还在，但是变成了undefined
+    console.info(exampleArr);//[0, 1, undefined × 1, 3, 4, 5, 6]
+
+    /*使用splice()插入数组*/
+    exampleArr = [0, 1, 2, 3, 4, 5, 6];
+    //从位置索引2开始，移除一个元素：2 插入后面的所有参数
+    exampleArr.splice(2,1,"one","two");
+    console.info(exampleArr);// [0, 1, "one", "two", 3, 4, 5, 6]
+
+    /*排序与反转*/
+    var data = [];
+    //以随机数字填充数组
+    for(var i = 0; i < 5; i++) {
+        data[data.length] = Math.floor(Math.random()*100);
+    }
+    console.info("原始数组：", data);
+    console.info("排序后的数组：",data.sort());
+    console.info("反转后的数组：", data.reverse());
+
+    //为对象排序
+    function  Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    //生成测试的数据
+    var people = [];
+    for(var i = 0; i < 5; i++){
+        var age = Math.floor(Math.random()*100);
+        people[people.length] = new Person('用户' + i, age);
+    }
+    function printPeople(arr) {
+        for (var i = 0; i < arr.length; i++){
+            console.info(arr[i].name+" : "+ arr[i].age);
+        }
+    }
+    /*forEach 回调遍历对象，函数的中参数会得到数组每一个属性值和下标*/
+    function printPeople2(arr) {
+        //callback 回调函数    属性    下标  数组本身
+        //每次遍历一次 执行一次回调的function
+        arr.forEach(function (value, index, array) {
+            console.info(value.name+" : "+ value.age);
+        })
+    }
+    printPeople(people);
+    //自定义排序- 哪个字段作为排序的依据
+    people.sort(function (p1, p2) {    //传入两个对象
+        if (p1.age > p2.age) return 1; //通过年龄进行判断 大于1 小于 -1 --》自动排序
+        if (p1.age < p2.age) return -1;
+        return 0; //相同 return 0
+        //return p1.age _ p2.age;
+    });
+    console.info("---------------------")
+    printPeople2(people);
+    /*callback + push 更新一个数组*/
+    var scores = [90,82,82,75];
+    var newScores = [];
+    scores.forEach(function (p1, p2, p3) { newScores.push(p1+5)});
+    console.info(newScores);
+    /*使用arr.map(callback)得到一个新数组*/
+    var newScores2 =scores.map(function (p1, p2, p3) {
+        return p1 +5;
+    })
+    console.info(newScores2);
+    /*数组进行累加*/
+    var sum = scores.reduce(function (previousResult, item, index, array) { return (previousResult + item); });
+    console.info(sum);
+</script>
+
+</body>
+</html>

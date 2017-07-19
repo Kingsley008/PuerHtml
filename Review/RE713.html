@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RE:文本、盒模型、js函数</title>
+    <style>
+        p{
+            font:italic bold 16px/20px 微软雅黑;
+            text-indent: 2em;
+            text-decoration: underline yellow;
+            text-shadow: 1px 2px 1px red;
+            text-align: center;
+            vertical-align: middle;
+            white-space: pre-wrap;
+            text-overflow: ellipsis;
+            cursor: zoom-in;
+        }
+        div{
+            outline:1px solid blue;
+            border: 10px dashed cadetblue;
+            width: 200px;
+            height: 200px;
+            overflow: auto;
+            box-shadow: 2px 2px 1px 2px blue, inset -2px -2px 1px 10px blue ;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>微软雅黑 16px 行高20px 居中对齐
+            p:last-child{
+            background-color: #999999;
+            font:12px/14px 宋体;
+            text-align: left;
+            }
+            微软雅黑 16px 行高20px 居中对齐
+            p:last-child{
+            background-color: #999999;
+            font:12px/14px 宋体;
+            text-align: left;
+            }</p>
+    </div>
+</body>
+    <script>
+        //变量的知识点
+        var num = 1;
+        var boolean = true;
+        var str = "1";
+        var undefined;
+        var obj ={name:"king"}
+        //利用一个函数将每一个变量的基本类型输出
+        var a = function () {
+            for(var i = 0; i < arguments.length; i++){
+                console.info( typeof arguments[i])
+            }
+        }
+        a(num,boolean,str,undefined,obj);
+        //js中为false的变量
+        console.info(!!0);
+        console.info(!!NaN);
+        console.info(!!undefined);
+        console.info(!!"");
+        console.info(!!null);
+        //连环调用函数
+        function A(num1, num2) {
+            function B(num) {
+                return num * num;
+            }
+            return Math.sqrt(B(num1) + B(num2));
+        }
+        console.info(A(3,4));
+        //连续调用某个函数两次
+        var twic =  function (otherFuc) {
+            otherFuc();
+            otherFuc();
+        }
+        twic(function () {
+            console.info("123")
+        })
+        //检查传入的参数
+
+        function saySome(name,sentence) {
+            if ( sentence === undefined){
+                sentence = "hello";
+            }
+            console.info(name + sentence);
+        }
+        saySome("a")
+
+
+
+
+
+
+    </script>
+</html>

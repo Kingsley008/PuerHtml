@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RegExp正则表达式</title>
+</head>
+<body>
+
+</body>
+<script>
+        /*一篇英文小说里查找hi*/
+        /\bhi\b.*\blucy\b/
+        /*全值包含的匹配*/
+        /88888888/.test("a88888888"); //true
+        /^88888888$/.test("a88888888"); //false
+        /*描点的使用*/
+        /^http:/.test("http://www.163.com");//true
+        /\.jpg$/.test("a.png");//false
+        /*手机号正则匹配*/
+        /^1[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/ //11位 1开头 数字结尾
+        /*元字符 \d */
+        /^1\d\d\d\d\d\d\d\d\d\d$/
+        /*量词 {m,n} */
+        /^1\d{10}$/
+        /*需求：邮箱；密码包含数字和字母；首字母大写*/
+        /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/
+        /*比如一个网站如果要求你填写的QQ号必须为5位到12位数字时*/
+        /^\d{5,12}$/
+        /*任何一个英文元音字母*/
+        /[aeiou]/
+        /*匹配标点符号(.或?或!)。*/
+        /[?!.]/
+        /*匹配a开头的一个单词*/
+        /\ba\w*\b/
+        /*这个表达式用于匹配美国的邮政编码。美国邮编的规则是5位数字，或者用连字号间隔的9位数字。*/
+        /\d{5}-\d{4}|\d{5}/
+        /*匹配用尖括号括起来的以a开头的字符串。*/
+        /a[^>]+/
+
+        /\*\w+\*]/.test("[asd]");
+        /*简单的IP地址匹配表达式*/
+        /(\d{1,3}\.){3}\d{1,3}/ //不幸的是，它也将匹配256.300.888.999这种不可能存在的IP地址
+        /^\[\d{1,2}:\d{1,2}]$/.test() //[123]
+        /*匹配网易邮箱 ： 以163 126 188 结尾即可*/
+        /^(.+)@(?;163|126|188)\.com$/
+        /*捕获 ---( ) \  (?:) 不捕获*/
+        //str.match(regxp)
+        var url = 'http://bolg.163.com/album?id=1#comment';
+        var reg = /^(https?:)\/\/([^\/]+)(\/[^\?]*)?(\?[^#]*)?(#.*)?$/;
+        var arr = url.match(reg);
+        var protocol = arr[1];
+        var host = arr[2];
+        var pathname = arr[3];
+        var search = arr[4];
+        var hash = arr[5];
+       /*使用正则替换子串 g表示全局  i不区分大小写*/
+       var str = 'The price of tomato is 5, the price of apple is 10 ;'
+        /*捕获的结果保存在了$1中*/
+       str.replace(/(\d+)/g,'$1.00'); //5.00 10.00
+        /*replace 的函数使用*/
+        var html = '<label>网站</label><input>123</input>'
+        html = html.replace(/[<>]/g,function (m) {
+            switch (m){
+                case ('<') :
+                    return '&lt';
+                case ('>'):
+                    return'&gt';
+            }
+        });
+        console.log(html);
+
+        function parseQuery(query) {
+            var json =""
+            var reg = /(\w)+(=)?(\w)*[^&]/g
+            var arr = query.match(reg);
+
+
+            arr.forEach(function (value,index,arr) {
+                var v = value;
+                /*最后一个不加逗号*/
+                if (index == arr.length -1){
+
+                    if(v.indexOf("=") == -1){
+                        json = json +"\""+ v +"\""+":"+"\""+""+"\""+"\n"
+                    }else{
+                        var arr2 =  v.split("=");
+                        if(arr[1] === undefined){
+                            arr[1] = "";
+                        }
+                        json = json +"\""+  arr2[0] +"\""+":"+"\""+arr2[1]+"\""+"\n"
+                    }
+                }else{
+                    if(v.indexOf("=") == -1){
+                        json = json +"\""+ v +"\""+":"+"\""+""+"\""+",\n"
+                    }else{
+                        var arr2 =  v.split("=");
+                        if(arr[1] === undefined){
+                            arr[1] = "";
+                        }
+                        json = json +"\""+  arr2[0] +"\""+":"+"\""+arr2[1]+"\""+",\n"
+                    }
+                }
+            });
+            var newJson = "{\n" + json + "}"
+            return  JSON.parse(newJson);
+        }
+       var va = parseQuery("name=jerry&age=1");
+        console.info(va); //name:jerry,age:1,
+
+</script>
+</html>

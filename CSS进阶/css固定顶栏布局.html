@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            width: 100%;
+        }
+        .head{
+            position: fixed;
+            top: 0;
+            height: 50px;
+            width: 100%;
+            background: pink;
+        }
+        .content{
+            background: burlywood;
+            width: 1000px;
+            padding-top:40px;
+            height: 800px;
+            margin: 0 auto;
+
+        }
+
+
+        .main{
+            background-color: red;
+            width: 800px;
+            height: 800px;
+            float: left;
+            margin: 0;
+        }
+        .aside{
+            background-color: lawngreen;
+            float: right;
+            width: 200px;
+            height: 800px;
+            margin: 0;
+        }
+        .clear::after{
+                     content: ".";
+                     clear: both;
+                     display: block;
+                     visibility: hidden;
+                     height: 0;
+                 }
+        .clear{
+            outline: 2px springgreen dashed;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="head"> head</div>
+    <div class="content">
+        <div class="clear">
+            <div class="main">
+
+            </div>
+            <div class="aside">
+
+            </div>
+        </div>
+    </div>
+    <div class="mask">foot</div>
+</body>
+</html>

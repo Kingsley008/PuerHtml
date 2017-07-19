@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>homework2</title>
+    <style>
+    body{
+        font: 14px 微软雅黑;
+    }
+    .tab{
+        border:1px solid #999;
+        width: 574px;
+    }
+    .content{
+        background-color: white;
+        padding: 20px;
+    }
+    ul{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        display: flex;
+    }
+    ul li{
+        height: 30px;
+        text-decoration: none;
+        list-style: none;
+        flex: 1 1 0;
+        background-color: #f1f1f1;
+        border: 1px solid #999999;
+        border-top: none;
+        border-right: none;
+        text-align: center;
+    }
+    ul li:first-child {
+        border-left: none;
+    }
+    ul li a {
+        text-decoration: none;
+        color: black;
+        vertical-align: middle;
+        width: 100%;
+        display: inline-block;
+    }
+    ul li:hover{
+        background-color: white;
+        border-bottom: none;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="tab">
+        <ul>
+            <li><a class="kc selected" href="">课程</a></li>
+            <li><a class="xxjh selected" href="">学习计划</a></li>
+            <li><a class="jntp selected" href="">技能图谱</a></li>
+        </ul>
+        <div class="content">
+            课程内容
+        </div>
+    </div>
+</body>
+</html>

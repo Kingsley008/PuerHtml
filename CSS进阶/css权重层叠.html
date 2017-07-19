@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS选择器</title>
+    <style>
+    /*    .sports{
+            color: aquamarine;
+        }
+        等价于,class中包含了sports
+        [class ~= sports] {
+            color: aquamarine;
+        }
+    */
+        /*权重 11*/
+        .main > h2{
+            color: yellowgreen;
+        }
+        /*CSS层叠以及优先级的计算*/
+        /*标签优先级权重 1 */
+        p{
+            color: aqua;
+            text-align: left;
+            font-weight: bold;
+        }
+        /*标签+类选择器 权重 11 */
+        p.special {
+            color: red !important;
+            text-align: right;
+        }
+        /* 权重 11 层叠颜色属性*/
+        p:first-child{
+            color:yellow;
+        }
+    </style>
+</head>
+<body>
+<div class="lei">类选择器 .class{ }</div>
+<div id="ID">id选择器 #ID{ }</div>
+<p>通配符选择器 *</p>
+    <div class="main">
+        <h2 class="title sports">标题</h2>
+        <p class="sports">内容...</p>
+        <div>
+            <h2 class="title sports">标题</h2>
+            <p class="sports">内容...</p>
+        </div>
+        <h2>test</h2>
+    </div>
+
+    <div>
+        <p class="special">css层叠</p>
+    </div>
+</body>
+</html>

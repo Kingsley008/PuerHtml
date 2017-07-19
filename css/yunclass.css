@@ -1,0 +1,164 @@
+/*初始化*/
+html, body, h1, h2, h3, h4, h5, h6, div, dl, dt, dd, ul, ol, li,
+p, blockquote, pre, hr, figure, table, caption,
+th, td, form, fieldset, legend, input, button, textarea, menu{
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+html, body{
+    height: 100%;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+
+}
+.r2:hover{
+    animation: bigger 2s both running ;
+}
+
+@keyframes bigger {
+   100%{ transform: scale(1.1);}
+}
+
+.tx{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    list-style-type: none;
+    vertical-align: middle;
+}
+.header ul{
+    text-align: center;
+    overflow: hidden;
+    color: white;
+    line-height: 60px;
+    height: 60px;
+    vertical-align: middle;/*设置图片居中 - 先给父元素加一个行高*/
+    background: url("../img/bk2.png") repeat-x;
+}
+
+.header ul li{
+    overflow: hidden;
+    display: inline-block;
+    margin-left: 38px;
+}
+.header input{
+    border: 0;
+    height:40px ;
+    width: 245px;
+}
+.sou{
+    background: url("../img/sou.png");
+    height: 40px;
+    width: 40px;
+    margin-top: 1.5px;
+    border: 0;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.nav{
+    background-color: #f5f5f5;
+    border: 2px darkorange solid;
+    height: 50px; /*设置了高度就不需要清楚浮动了*/
+    overflow: hidden;
+    width: 100%;
+}
+
+.nav img{
+    vertical-align: middle;
+}
+.nav > a {
+    float: left;
+    width: 245px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    border-right: 1px darkblue solid;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.content{
+    background-color: #f5f5f5;
+    border: 1px blue solid;
+    height: 550px;
+    overflow: hidden;
+}
+.nav span{
+    font: 12px 宋体;
+}
+.content::after {
+     content: ".";
+     clear: both;
+     display: block;
+     visibility: hidden;
+     height: 0;
+ }
+
+.navright{
+/*    outline: 1px darkred dashed;*/
+    width: 80%;
+    float: right;
+    overflow: hidden;
+}
+.r2{
+   margin: 10px;
+}
+.side{
+    float: left;
+    background-color: #f5f5f5;
+
+}
+.gongggao ul{
+    margin: 10px;
+}
+.gongggao ul li{
+    width: 230px;
+    height: 40px;
+    background-color: white;
+}
+.gongggao ul li a{
+    padding-left: 20px;
+    height: 100%;
+    display: block;
+}
+.side ul li a:hover {
+    background-color: #f1f1f1;
+}
+.jindu{
+    vertical-align: middle;
+    margin: 10px;
+    width: 230px;
+    height: 40px;
+    background-color: white;
+}
+.jindu a{
+    margin-left: 20px;
+    width: 100%;
+    display: block;
+}
+.share {
+    width: 210px;
+    height: 33px;
+    padding: 20px 10px;
+    background-color: white;
+    margin: 10px;
+}
+.share ul{
+    float: right;
+}
+.share ul li{
+    display: inline-block;
+    list-style: none;
+}
+.main{
+    position: absolute;
+    background-color: lightgoldenrodyellow;
+    top: 120px;
+    left: 250px;
+    bottom: 0px;
+    right:10px;
+    overflow: scroll;
+}

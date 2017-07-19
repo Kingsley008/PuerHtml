@@ -1,0 +1,206 @@
+/*初始化*/
+html, body, h1, h2, h3, h4, h5, h6, div, dl, dt, dd, ul, ol, li,
+p, blockquote, pre, hr, figure, table, caption,img,
+th, td, form, fieldset, legend, input, button, textarea, menu{
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+html, body{
+    height: 100%;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+
+}
+/*nav区*/
+.nav{
+    outline: 1px royalblue solid;
+    height: 69px;
+}
+.nav ul{
+    width: 1370px;
+    overflow: hidden;
+    position: relative;
+    background: url("../img/bkblack.png")repeat-x 0px 0px;
+    text-align: center;
+    height: 69px;
+    vertical-align: middle;
+    line-height: 60px;
+}
+.nav ul li{
+    overflow: hidden;
+    display: inline-block;
+    font: 12px 宋体;
+    width: 95px;
+    height: 65px;
+    margin-right: 18px;
+    color: whitesmoke;
+
+}
+.nav ul li a{
+    display: inline-block;
+    height: 65px;
+    width: 100px;
+    line-height: 60px;
+    vertical-align: middle;
+}
+.nav ul li:last-child{
+    position: absolute;
+    right: 150px;
+
+}
+.first::before{
+    display: inline-block;
+    content: "";
+    position: absolute;
+    bottom: 20px;
+    left: 280px;
+    width: 165px;
+    height: 30px;
+    background: url("../img/btn.png") no-repeat 0px -160px;
+}
+
+.nav ul li a:hover{
+    background-color:#212121;
+}
+.sub-nav{
+    outline: 1px royalblue solid;
+    height: 30px;
+}
+
+
+
+/*body*/
+.body{
+    width: 1370px;
+    height: 1090px;
+    background-color: #f5f5f5;
+}
+.clearfix{
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px #d3d3d3 solid;
+    width: 980px;
+    height: 1089px;
+}
+.clearfix::after{
+    content: ".";
+    display: block;
+    clear: both;
+    height: 0px;
+    visibility: hidden;
+}
+.foot{
+    height: 128px;
+    border: 1px #d3d3d3 solid;
+}
+.content{
+    float: left;
+    width: 707px;
+    height:inherit;
+    border-right: 1px #d3d3d3 solid;
+}
+.side{
+   width: 270px;float: right;
+}
+
+.top-pic1{
+    margin: 40px 18px 40px 40px;
+    float: left;
+    border:1px #dddddd solid ;
+    padding: 4px;
+    width: 199px;
+    height: 200px;
+    vertical-align: middle;
+}
+.top-left{
+    display: inline-block;
+    width: 412px;
+    height: 236px;
+}
+.top-left h3{
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    margin-top:45px;
+    margin-bottom: 14px;
+    height: 24px;
+    font: 20px 微软雅黑;
+}
+
+.top-left h3::before{
+    display: inline-block;
+    width: 64px;
+    height: 25px;
+    content: "";
+    background: url("../img/Yun2.png") no-repeat 0px -61px ;
+}
+
+.top-left h4{
+    margin-top: 18px;
+    font: 14px 宋体;
+    margin-bottom: 10px;
+}
+.zuozhe{
+    display: inline;
+    font: 12px 宋体;
+}
+.zuozhe~span{
+    display: inline;
+    font: 12px 宋体;
+
+}
+
+.top-left button{
+    padding: 4px;
+    font: 12px 宋体;
+    height: 30px;
+    line-height: 30px;
+    border: 1px #e6e6e6 solid;
+    border-radius: 2px;
+    background-color: #ffffff;
+    box-shadow: #999999 1px 1px 1px;
+    display: flex;
+    align-items: center;
+}
+
+
+
+.top-left button span::before{
+    display: inline-block;
+    width: 25px;
+    height: 20px;
+    content: "";
+    background: url("../img/Yun2.png") no-repeat 0px 5px ;
+}
+
+.fengxiang::before{
+    background: url("../img/Yun2.png") no-repeat 0px -15px !important;
+}
+.pinglun::before{
+    content: "123";
+    background: url("../img/Yun2.png") no-repeat -25px 3px  !important;
+}
+.zuozhequ{
+    display: flex;
+    align-items: center;
+}
+
+.jiemu{
+    margin-top: 20px;
+    display: block;
+    margin-bottom: 10px;
+}
+.touxiang{
+    width: 35px;
+    height: 35px;
+}
+.top-left ul li{
+    display: inline-block;
+    margin-bottom: 20px;
+}
+.top-left p:last-child{
+    font: 12px 宋体;
+
+}

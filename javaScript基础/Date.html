@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>date Expression</title>
+</head>
+<body>
+
+</body>
+    <script>
+        var today = new Date(); //当前时间
+        var date = new Date(2017,11,5,14,57,18); //12月5日  月份0开始
+        date.getFullYear();
+        date.getMonth();
+        date.getDate();
+        date.getHours();
+        /*日期格式化*/
+        function padding(number) {
+            return number < 10 ? '0' +number : '' +number;
+        }
+        function format(date) {
+            return date.getFullYear() + "-" + padding(date.getMonth()+1) + "-" + padding(date.getDate())+
+                    " " + padding(date.getHours()) + ":" + padding(date.getMinutes()) + ":" +padding(date.getMilliseconds());
+        }
+        console.info( format(today));
+        /*获取指定月数的天数*/
+        var date1 = new Date(2017,2,0); //得到2月的最后一天 02-28
+        var date2 = new Date(2017,3,0);//得到三月的最后一天
+
+        function getDay(year, month) {
+            var date = new Date(year,month,0);
+            return date.getDate();
+        }
+
+        console.info('2008年2月有' + getDay(2008,2)+ "天");
+        console.info('2009年2月有' + getDay(2009,2)+ "天");
+
+        /*date 转换成 number */
+         var num = date.getTime(); //距离1970年 1月1日 0 0 的毫秒数
+          date3 = new Date(num); //得到日期对象
+
+    </script>
+</html>

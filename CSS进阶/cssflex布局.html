@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flex 布局</title>
+    <style>
+        .item{
+            height: 20px;
+            background-color: springgreen;
+            margin: 2px;
+            text-align: center;
+            flex: 1 1 0;
+        }
+        .flex {
+            background-color: cornflowerblue;
+            outline: blue dashed 1px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+
+        }
+        .a{
+            flex-basis: 0;
+            flex: 1 1 0;
+            order: 10;
+        }
+        html,body,.container{
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex container">
+        <div class="item a">A</div>
+        <div class="item">B</div>
+        <div class="item">C</div>
+    </div>
+</body>
+</html>

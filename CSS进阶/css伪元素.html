@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>伪元素</title>
+    <style>
+    /*Choose first letter T*/
+        p::first-letter{
+            font-size: larger;
+        }
+        p::first-line{
+            color: darkgray;
+        }
+        p::before{
+            content: "...";
+        }
+        p::after{
+            content: "...";
+        }
+        p::selection{
+            color: palevioletred;
+        }
+        p:hover{
+            color: red;
+            font-size:larger;
+        }
+        p:active{
+            color: yellowgreen;
+        }
+        h2:hover{
+            color: aqua;
+        }
+        h2 + p {
+            font-size: 24px;
+        }
+        h2 ~p {
+            font-family: "Adobe Arabic";
+        }
+    </style>
+</head>
+<body>
+    <h2>Topic</h2>
+    <p>To be or not to be</p>
+    <p>This is a Question</p>
+</body>
+</html>
