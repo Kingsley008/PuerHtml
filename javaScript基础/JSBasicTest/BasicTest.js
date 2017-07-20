@@ -209,3 +209,36 @@ search2(arr,4);*/
 	formatDate(date, "yyyy-MM-dd HH:mm:ss");    返回值： "2001-09-11 08:26:08"
 请写出函数formatDate的实现代码。*/
 
+/*编码实现下面删除数组中重复元素的功能
+[2,4,2,3,4].deleteRepeat()		返回：[2,4,3]*/
+
+
+Array.prototype.deleRepeat =function () {
+
+    for (var i = 0; i < this.length ; i++){
+        for (var j = i+1; j < this.length; j++){
+            if(this[i] == this[j]){
+                this.splice(j,1);
+            }
+        }
+    }
+}
+
+Array.prototype.findIndex = function(str){
+    for(var i = 0; i <this.length;i++){
+
+        if (this[i] == str){
+            return i;
+        }
+    }
+}
+
+Array.prototype.deleByStr = function (str) {
+    var index = this.findIndex(str);
+    this.splice(index,1);
+}
+
+arr = [2,4,2,3,4];
+arr.deleByStr(3);
+console.info(arr);
+

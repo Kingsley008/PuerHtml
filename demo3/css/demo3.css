@@ -14,12 +14,14 @@ a{
     color: inherit;
 
 }
+
 /*nav区*/
 .nav{
-    outline: 1px royalblue solid;
     height: 69px;
+
 }
 .nav ul{
+    margin: 0 auto;
     width: 1370px;
     overflow: hidden;
     position: relative;
@@ -77,6 +79,7 @@ a{
     width: 1370px;
     height: 1090px;
     background-color: #f5f5f5;
+    margin: 0 auto;
 }
 .clearfix{
     margin: 0 auto;

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数的复杂调用</title>
+</head>
+<body>
+<script>
+
+    var add1;
+    function add1(i){
+        console.log("函数声明:" + (i + 100));
+    }
+    add1(1);   // 101
+    add1 = function(i){
+        console.log("函数表达式:" + (i + 10));
+    }
+    add1(1);  // 11
+    add1(1);  // 11
+    //因为函数声明总是被提到最前面的,所以当调用函数之前只有函数声明时,以函数声明为准
+    //当调用函数之前同时有同名的函数声明和函数表达式时,以函数表达式为准
+    /**
+     * 闭包使用举例1
+     * 将字符串中的一些特定字符按顺序用数组中的元素替换，例如：
+     * var arr = ['c','f','h','o'];
+     * var str = 'ab4de8g4ijklmn7';
+     * 替换后 str == 'abcdefghijklmno';
+     * replace的用法请参考https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace
+     **/
+     var arr = ['c','f','h','o'];
+     var str = 'ab4de8g4ijklmn1';
+     console.log(str);
+
+     var func = (function(){
+       // count变量会保存在闭包作用域内，表示func被调用次数（即正在替换第几个字符）
+       var count = 0;
+       return function(){
+         return arr[count++];
+       }
+     })();
+
+     str = str.replace(/\d/g, func)
+     console.log(str);
+
+        var person = {name:"Tom", age:100};
+
+        (function () {
+            var person = {
+                name:"Tom",
+                age:"50",
+            };
+            (function () {
+                var person = {
+                    name : "Tom",
+                    age:"10",
+                };
+                console.info(person.age);
+            })()
+        })();
+
+
+      var f0 =  function () {
+          var f1 = function () {
+              var person = {
+                  name: "Tom",
+                  age: "50",
+                  f2 : function () {
+                      console.info(person.age);
+                  }
+              }
+              person.f2();
+              var func2 = person.f2;
+              func2();
+              var func = new Function(
+                  "console.info(person.age)"
+              )
+              func(); // 实例化的函数不会逐层调用 访问全局  100
+              }
+          f1();
+      }
+        f0();
+      /*利用闭包进行封装*/
+     var Car =  function (type) {
+         var status = "stop", light = "off";
+          return{
+              type:type,
+              start:function () {
+                status ="driving";
+                  light = "on";
+              },
+          }
+      }
+      var audi = Car("audi"); //访问不到 status 和light 这个两个变量
+      var audi2 = new Car("audi2");
+
+         // // 使用闭包
+        var sum = (function() {
+            var add = function(i, j){
+                return i+j;
+            }
+            return function(i,j) {
+                add(i, j);
+            }
+        })()
+        sum(1,2);
+
+         function sum(i, j) {
+           var add = function(i, j){
+             return i+j;
+           }
+           return add(i, j)
+         }
+         sum(1,1);
+    //// 函数柯里化
+    /*
+    1. 函数柯里化通常是指把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的并且返回一个接受余下的参数而且返回结果的新函数的技术。*/
+
+     // 1. 最简单的柯里化
+     // sum函数接受三个参数，并返回求和结果
+     var sum = function(a,b,c) {
+         return a+b+c;
+     }
+     // // 最简单柯里化的sum函数
+     var sum_curry = function(a){
+         return function(b,c){
+             return a+b+c;
+         }
+     }
+     sum_curry(1)(2,3);
+
+
+    /*
+    2. 更泛化的定义是指给函数分步传递参数，每次函数接受部分参数后应用这些参数，并返回一个函数接受剩下的参数，这中间可嵌套多层这样的接受部分参数的函数，直至返回最后结果。归纳一下就是逐步传参，逐步缩小函数的适用范围，逐步求解的过程。
+    */
+     // 2. 泛化的柯里化
+     // currying实现将一个函数转变为柯里化函数
+     var currying = function (fn) {
+        var _args = [];
+        return function () {
+         if (arguments.length === 0) {
+           // 实现最终的计算
+           return fn.apply(this, _args);
+         }
+         // 这里只是简单的将参数缓存起来（用于解释柯里化概念，并非实际应用场景）
+         Array.prototype.push.apply(_args, [].slice.call(arguments));
+         return arguments.callee;
+        }
+     };
+     // sum函数接受任意参数，并返回求和结果
+     var sum=function () {
+        var total = 0;
+        for (var i = 0, c; c = arguments[i++];) {
+            total += c;
+        }
+        return total;
+     };
+     // 或得一个泛化柯里化的sum函数
+     var sum_curry = currying(sum);
+     sum_curry(1)(2,3);
+     sum_curry(4);
+     console.log(sum_curry());
+
+    /*
+    3. 从更上层的角度去理解，柯里化允许和鼓励你将一个复杂过程分割成一个个更小的更容易分析的过程（这些小的逻辑单元将更容易被理解和测试），最后这样一个难于理解复杂的过程将变成一个个小的逻辑简单的过程的组合。
+    */
+
+    // 3.上面两个例子很好的解释了什么是函数柯里化，但是什么时候用？任何能简化逻辑实现、提高可读性地方都鼓励使用（好像是废话...），举个稍微具体点的列子：
+     // refresh函数实现通过ajax请求更新页面上的相关模块的数据。
+     function refresh(url, callback){
+         // ajax_get实现一个ajax get请求，请求成功后回调callback函数（这里不提供ajax_get实现，有兴趣的同学可以参考前面课程中有提到过类似的实现)。
+         ajax_get(url, callback);
+     }
+
+     function update(data){
+       // 更新的逻辑全部在这里处理
+     }
+     refresh("xxx?target=news", update);
+
+
+     // update函数是一个柯里化后函数，第一级函数根据传入参数将需要更新的模块分拆出来。
+     function update(target){
+     var _elm = document.getElementById(target); // 这里实现模块分拆,代码仅是举例
+        return function(data){ // 返回一个用请求结果更新页面显示的函数
+        _elm.innerHTML = data; // 这里实现用ajax请求返回结果更新页面显示过程,代码仅是举例
+        }
+     }
+     // 更新页面可以写成这样
+     refresh("xxx?target=news", update("news"));
+     refresh("xxx?target=pictures", update("pictures"));
+
+     // 继续，如果新闻模块需要继续拆分成“社会”新闻，“娱乐”新闻，那我们柯里化的update函数该怎么写呢？可以这样写:
+     function update(target){
+         var _elm = document.getElementById(target); // 这里实现第一级模块分拆,代码仅是举例
+         return function(type){ // 返回一个接受其余参数的函数
+            var _elm = document.getElementById(item); // 这里实现第二级模块分拆,代码仅是举例
+            return function(data){ // 返回一个接受其余参数并最终更新页面显示的函数
+                _elm.data = data; // 这里实现用ajax请求返回结果更新页面显示过程,代码仅是举例
+            }
+         }
+     }
+     // 更新页面就可以写成这样
+     refresh("action.do?target=news&type=society", update("news")("society"));
+     refresh("action.do?target=news&type=entertainment", update("news")("entertainment"));
+
+
+</script>
+</body>
+</html>
