@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js中的类继承</title>
+</head>
+<body>
+    <script>
+        /*类继承 对其他语言的模拟*/
+        function ClassA() {
+            this.classMedthod = function () {
+
+            }
+        }
+        ClassA.prototype.api = function () {
+            console.info("api in Class A.")
+        }
+        function ClassB() {
+            ClassA.apply(this, arguments);
+        }
+        ClassB.prototype = new ClassA();
+        ClassB.prototype.constructor = ClassB;
+        ClassB.prototype.api = function () {
+            ClassA.prototype.api.apply(this, arguments);
+        }
+        var b = new ClassB();
+        b.api;
+
+
+        /*原型继承*/
+        var Animal = function () {
+
+        };
+        Animal.prototype = {
+            name: "animal",
+            eat: function () {
+                console.info('动物总要吃东西');
+            },
+            printName: function () {
+                console.info("本动物的名字是" + this.name);
+            }
+        };
+        function Lion(name) {
+            //重写属性
+            this.name = name;
+            //重新方法
+            this.eat = function () {
+                console.info("狮子吃肉")
+            }
+            this.run = function () {
+                console.info("狮子跑得快")
+            }
+        }
+        Lion.prototype = new Animal();
+        var lion = new Lion("狮子");
+        lion.printName();
+
+
+        /*原型继承 obj.create(proto)*/
+        (function () {
+            var proto = {
+                action1: function () {
+                },
+                action2: function () {
+                }
+            }
+            //返回一个继承了proto对象的新对象 obj
+            var obj = Object.create(proto);
+        })();
+
+        //定义附加属性
+        var Parent = {
+            name: 'parent',
+            age:100
+        }
+        var propertyDescriptor = {
+            "name":{
+                value:"daughter",
+                writable:true
+            },
+            "age":{
+                value:10,
+                writable:true
+            }
+        }
+        var daughter = Object.create(Parent,propertyDescriptor);
+        console.info(daughter);
+
+        /*兼容低版本IE*/
+        var clone = (function () {
+            var F = function () {
+
+            }
+            return function (proto) {
+                F.prototype = proto;
+                return new F(); //返回一个继承了proto对象的新对象
+            }
+        })()
+        var obj2 = clone();
+        /*a.创建一个圆（Circle）的类，并定义该类的一个属性（半径）和两个方法（周长和面积），其中圆的半径可以通过构造函数初始化
+            b.创建圆的一个对象，并调用该对象的方法计算圆的周长和面积*/
+        function Circle (r) {
+            this.r = r;
+        }
+        Circle.prototype.calPerimeter = function () {
+            return (2*this.r*Math.PI).toFixed(2)
+        }
+        Circle.prototype.calArea = function () {
+            return (this.r*this.r*Math.PI).toFixed(2)
+        }
+        var c1 = new Circle(5);
+        console.info(c1.calArea());
+        console.info(c1.calPerimeter());
+
+        var arr = [1, 2, 4, 6, 7, 9, 19,20, 30, 40, 45, 47];
+
+        /*使用原型扩充Number类的功能*/
+        Function.prototype.method = function (name, callback) {
+            //如果这个函数名不存在原型中 进行name = callback
+            if (! this.prototype[name]){
+                this.prototype[name] = callback;
+                return this;
+            }
+        };
+        Number.method('integer',function () {
+            return Math[this < 0 ? 'ceil':'floor'](this);
+        })
+        console.info((10/3).integer()); // 3
+        console.info((-10/3).integer());// -3
+
+
+    </script>
+</body>
+</html>

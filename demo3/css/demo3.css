@@ -77,7 +77,7 @@ a{
 /*body*/
 .body{
     width: 1370px;
-    height: 1090px;
+    height: 1127px;
     background-color: #f5f5f5;
     margin: 0 auto;
 }
@@ -86,7 +86,7 @@ a{
     background-color: #ffffff;
     border: 1px #d3d3d3 solid;
     width: 980px;
-    height: 1089px;
+    height:1126px;
 }
 .clearfix::after{
     content: ".";
@@ -206,4 +206,184 @@ a{
 .top-left p:last-child{
     font: 12px 宋体;
 
+}
+.zuozhe+span{
+    margin-left: 20px;
+    margin-right: 143px;
+}
+b{
+    color: #c20c0c;
+}
+.zuozhe::after{
+    content: "";
+    display: inline-block;
+    height: 12px;
+    width: 20px;
+    background: url("../img/sprite2.png") no-repeat 0 -5px;
+}
+
+/*middle*/
+.middle span, h3{
+    margin-top: 54px;
+    display: inline-block;
+}
+.middle h3,table {
+    font: 18px/37px 微软雅黑;
+    margin-left: 38px;
+}
+.middle span {
+    margin-left: 32px;
+    font: 14px 宋体;
+}
+.middle table{
+    font: 12px 微软雅黑;
+    border:1px #d9d9d9 solid;
+    border-top: 2px #c20c0c solid;
+    margin-right: 20px;
+}
+.middle table thead tr{
+    background-color: #f0f0f0;
+    height: 35px;
+    border-bottom:1px #d9d9d9 solid;
+}
+.middle table thead tr td{
+    padding-left: 6px;
+    border-right: 1px #d9d9d9 solid;
+    vertical-align: middle;
+
+}
+.middle table{
+    table-layout: fixed;
+    color: #666666;
+    border-collapse: collapse;
+}
+
+.middle table thead tr td:nth-child(1){
+    width: 85px;
+}
+
+.middle table thead tr td:nth-child(2){
+    width: 185px;
+}
+.middle table thead tr td:nth-child(3){
+    width: 56px;
+}
+.middle table thead tr td:nth-child(4){
+    width: 123px;
+}
+
+.middle table thead tr td:nth-child(5){
+    width: 175px;
+}
+.middle table tbody tr:nth-child(even){
+    background-color:#f0f0f0;
+}
+.middle table tbody tr{
+    height: 26px;
+}
+.middle table tbody tr td:first-child{
+    padding-left: 35px;
+}
+td{
+    width:300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.middle table tbody tr td a{
+    margin-bottom: -2.5px;
+    display: inline-block;
+    margin-left: 5px;
+    width: 25px;
+    height: 16px;
+    background: url("../img/Yun2.png") no-repeat -4px -41px;
+}
+
+.bottom{
+    margin-left: 38px;
+    font: 12px 微软雅黑;
+}
+.bottom img {
+    width: 50px;
+    height: 50px;
+}
+.bottom h3 {
+    height: 24px;
+    font: 20px 微软雅黑;
+}
+.bottom h3 ~ span{
+    font: 12px 宋体;
+    margin-left: 26px;
+}
+textarea{
+    width: 576px;
+    height: 64px;
+}
+.bottom form {
+    padding: 18px;
+    border-top: 2px #c20c0c solid;
+    margin-top: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 635px;
+    margin-right: 30px;
+
+}
+.bottom form img {
+    margin-bottom: 15px;
+
+}
+.bottom button{
+ background-color: #2e7ecb;
+    color: #dddddd;
+    padding: 0px;
+    border: 0px;
+    width: 46px;
+    height: 24px;
+    text-align: center;
+    border-radius: 3px;
+    float: right;
+    margin-top: 10px;
+}
+#pingluncount{
+    margin-left: 51px;
+    color: #9b9b9b;
+}
+
+.yipinglun ul {
+    list-style: none;
+    margin-top: 28px;
+    margin-right: 30px;
+}
+.yipinglun ul p {
+    display:  inline-block;
+    line-height: 18px;
+    color: #000000;
+    font: 12px 微软雅黑;
+}
+
+.yipinglun ul li {
+    border-top: 1px solid #999999;
+    padding:20px 0px;
+}
+.yipinglun ul li a{
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+}
+.yipinglun ul li div {
+    display: inline-block;
+    width: 458px;
+    vertical-align: top;
+}
+.time{
+    float: right;
+}
+
+.vip::after{
+    content: "";
+    display: inline-block;
+    height: 12px;
+    width: 20px;
+    background: url("../img/sprite2.png") no-repeat 0 -5px;
 }

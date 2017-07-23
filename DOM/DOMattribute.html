@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM attribute </title>
+    <style>
+        .disable {
+            background-color: #c20c0c;
+        }
+    </style>
+</head>
+<body>
+    <form class="A">
+        <label for="username"></label><input id="username" type="text" maxlength="20">
+        <button class="btn" onclick="changeType2()" >提交</button>
+    </form>
+    <table style="border: 0.5px solid darkblue">
+        <tr><td id="name" data-name="王勇" onclick="showName()">姓名</td><td id="fillname"></td></tr>
+        <tr><td id="gender" data-gender-man="男" onclick="showGender()">性别</td><td id="fillgender"></td></tr>
+    </table>
+</body>
+    <script>
+        function $(id) {
+            return document.getElementById(id);
+        }
+
+        function changeType1() {
+               $('username').className = "disable";
+        }
+        function changeType2() {
+            $('username').disabled = "";
+        }
+        function showName() {
+           $('fillname').textContent =  $('name').dataset.name;
+
+        }
+        function showGender() {
+            $('fillgender').textContent =  $('gender').dataset.genderMan;
+        }
+
+
+    </script>
+</html>

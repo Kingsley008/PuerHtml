@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOMCRUD</title>
+</head>
+<body>
+    <div id="userlist">
+        <ul>
+            <li><a href="#">用户A</a> <img src="#"></li>
+            <li><a href="#">用户B</a> <img src="#"></li>
+            <li><a href="#">用户C</a> <img src="#"></li>
+        </ul>
+    </div>
+</body>
+    <script>
+        /*需求1： 在用户C后面插入一个用户D*/
+        var userlist = document.getElementById('userlist');
+        var newLi = document.createElement('li'); //li结点
+
+      //  userlist.firstElementChild.appendChild(newLi);
+
+        /*将D用户插入到C前*/
+        userlist.firstElementChild.insertBefore(newLi,userlist.firstElementChild.lastElementChild);
+
+        var newA = document.createElement('a');
+        newA.href = "#";
+        newA.innerText = '用户D';
+        newLi.appendChild(newA);
+        var newImg = document.createElement('img');
+        newImg.src = '#';
+        newLi.appendChild(newImg);
+        /*将用户A删除*/
+        var userA = userlist.querySelector('ul li');
+        userlist.firstElementChild.removeChild(userA);
+
+        /*使用innerhml 进行内容的增加*/
+        var newLi2 = document.createElement('li');
+        userlist.lastElementChild.appendChild(newLi2);
+        newLi2.innerHTML = '<span>innerHTML 常常用于新增节点 且无用户需要填写的内容</span>';
+        /*修改 用户B  -- 用户BB*/
+        userlist.firstElementChild.firstElementChild.firstElementChild.textContent = '用户BB';
+
+        /*对以上方法进行封装*/
+        function $(id) {
+            return document.getElementById(id);
+        }
+        var userlistCRUD = userlistCRUD || {};
+        userlistCRUD.Userlist = function (id) {
+            this.userElem = $(id);
+        }
+        userlistCRUD.Userlist.prototype = {
+            constructor :userlistCRUD.Userlist,
+            remove:function (child) {
+                this.userElem.firstElementChild.removeChild(child);
+            },
+            create:function (node, content) {
+              var node = document.createElement(node);
+              node.textContent = content;
+              this.userElem.firstElementChild.appendChild(node);
+              return this.userElem.firstElementChild.lastElementChild;
+            }
+        }
+        var list = new userlistCRUD.Userlist('userlist');
+        var ABC = list.create('li','ABC');
+        list.remove(ABC);
+    </script>
+</html>

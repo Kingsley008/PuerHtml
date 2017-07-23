@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算器代码重构</title>
+</head>
+<body>
+    <div style="text-align: center">
+        <h2>我的小小计数器</h2>
+        <hr>
+        <h3>计算结果为：<span id="result"></span></h3>
+    </div>
+    <script>
+/*        var resultElem = document.getElementById('result');
+        var x = 3, y = 4;
+        resultElem.innerHTML = x + y;*/
+
+        /*开始重构*/
+        var myNamespace = myNamespace || {};
+        //定义一个命名空间 如果已经存在 返回一个空对象确保 命名空间不重名
+        myNamespace.Caculator = function (OutputElementId) {
+            this.outputElem  = document.getElementById(OutputElementId);
+        };
+
+        /*由于每次创建对象都会重新定义add方法 浪费内存： 继续重构*/
+        //利用原型进行优化
+        myNamespace.Caculator.prototype = function () {
+            var add = function (x,y) {
+                var result = x + y;
+                this.outputElem.innerHTML = result;
+            },
+                subtract = function (x,y) {
+                var result = x - y;
+                this.outputElem.innerHTML = result;
+            };
+            return {
+                constructor: myNamespace.Caculator,
+                add:add,
+                subtract:subtract
+            };
+        }();
+            
+
+        /*确保页面元素装载成功 可以进行访问*/
+        window.onload = function () {
+            var calculator = new myNamespace.Caculator('result');
+            calculator.subtract(1,9);
+        };
+
+        /*var Caculator 定义在全局中 会产生 命名冲突*/
+
+/*        var MYNAMESPACE = {
+            person: function(name) {
+                this.name = name;
+                this.getName = function() {
+                    return this.name;
+                }
+            }
+        };*/
+        /*注意在定义命名空间构造函数时，需要将其定义在prototype上，否则新建的实例无法访问对象的方法。*/
+
+
+    </script>
+
+</body>
+</html>

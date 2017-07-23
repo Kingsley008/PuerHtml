@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RE:代码结构优化</title>
+</head>
+<body>
+    <div style="text-align: center">
+        <h3>计算器优化</h3>
+        <div>结果是 <span id="result"></span></div>
+    <hr>
+
+    </div>
+    <script>
+        /*用2种方法实现一个animal的类的继承子类*/
+        function Animal() {
+            this.name = "animal";
+            this.say = function () {
+                console.info("I am " + this.name);
+            }
+        }
+        function Lion() {
+            this.name = "Lion";
+            this.run  = function () {
+                console.info("I can run fast");
+            }
+        }
+        Lion.prototype = new Animal();
+        Lion.prototype.constructor = Lion;
+        var lion = new Lion()
+        lion.say();
+
+        /*使用闭包 和 Object.defineProperty() 对对象进行封装*/
+        function Person() {
+            var name = "A";
+            var age = 20;
+            return{
+                intro: function () {
+                    console.log("I am "+name+" " +age+ " years old");
+                }
+            }
+        }
+        p1 = Person();
+        p1.intro();
+        function createPerson() {
+            var Person = {};
+            Object.defineProperties(Person,{
+                name:{
+                    value : "B",
+                    writable:false,
+                },
+                age:{
+                    value:30,
+                },
+                intro2:{
+                    value : function () {
+                        console.log("I am "+this.name+" " +this.age+ " years old");
+                    }
+                }
+
+            })
+            return Person;
+        }
+        p2 = createPerson();
+        p2.intro2();
+        p2.name = "C";
+        p2.intro2();
+
+        /*使用container的方式实现 命名空间的管理*/
+
+        var  container = {
+            obj :{
+                call: function () {
+                    console.info("obj in container")
+                }
+            }
+        }
+
+        var obj = {
+            call:console.info("obj in window ")
+        }
+
+        var Useobj = container.obj;
+        Useobj.call();
+
+        /*写一个简单的页面计算器 实现代码的 封装 优化 命名空间管理*/
+        var myNameSpace = myNameSpace || {};
+        myNameSpace.result = 'result';
+        myNameSpace.Caculator = function (id) {
+            this.resultEle = document.getElementById(id);
+        };
+
+        myNameSpace.Caculator.prototype = {
+                constructor : myNameSpace.Caculator,
+                add: function (a,b) {
+                    var result = a+b;
+                    this.resultEle.innerHTML = result;
+                },
+        };
+
+        window.onload = function () {
+            var ca = new myNameSpace.Caculator('result');
+            ca.add(1,10);
+        };
+
+
+
+        /*使用JavaScript函数模拟WPF依赖属性内置的数据验证和变更通知功能*/
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        function MyObject() {
+            this.publicValue =1;
+            var privateValue = 0;
+            this.setValue = function (value) {
+                privateValue = value;
+            };
+            this.getValue = function () {
+                return privateValue;
+            };
+        }
+        var obj = new MyObject();
+        console.info(obj.getValue()); // private 0
+        console.info(obj.publicValue); //public 1
+         /*存取器描述属性的特性*/
+         /*注意：当使用了getter或setter方法：不允许使用writable和value这两个属性*/
+        function Book() {
+            var name = "java";
+            Object.defineProperty(this, 'name',{
+                //当获取值的时候触发的函数
+                get:function () {
+                    return name;
+                },
+                //当设置值的时候触发的函数,设置的新值通过参数value拿到
+                set:function (value) {
+                    name = value;
+                },
+                configurable:true,
+                enumerable:true,
+            });
+        }
+        var book = new Book();
+        console.info(book.name);
+        book.name = "javascript";
+        delete  book.name; //  configurable:true, 可以被删除
+        console.info(book.name);
+
+        /*value: 设置属性的值
+        writable: 值是否可以重写。true | false
+        enumerable: 目标属性是否可以被枚举。true | false
+        configurable: 目标属性是否可以被删除或是否可以再次修改特性 true | false*/
+        var createPerson = function (firstName, lastName) {
+            var person = {};
+            Object.defineProperties(person,{
+                firstName:{
+                    value: firstName,
+                    writable: false,
+                    enumerable:true
+                },
+                lastName:{
+                    value: lastName,
+                    writable: true,
+                    enumerable:true
+                },
+                fullName:{
+                    get:function () {
+                        return this.firstName + " " + lastName;
+                    },
+                    enumerable:true
+                }
+            })
+            return person;
+        }
+        person = createPerson("Kingsley","Wang");
+        console.info(person.fullName);
+        person.firstName = "Tom"; //firstName -- 不可重写
+        console.info(person.fullName);
+
+    </script>
+
+</body>
+</html>

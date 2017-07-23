@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支持改变通知的属性</title>
+</head>
+<body>
+    <h3 id="Book"></h3>
+    <script>
+        //参数name和price都成为了函数闭包的组成部分，可用于保存变化的数据
+        var Book = function (name, price) {
+            //这里两个数组，用于保存外界传入用于回调函数
+            var priceChanging = []; //保存数据验证函数， 未通过验证 返回false
+            var priceChanged = [];//数据已经更改 通过回调这些函数 更新UI界面
+
+            this.name = function (val) {
+                if (val !== undefined){
+                    name = val;
+                }
+                //这里返回的是闭包中的name变量的当前值，不是对象的name函数
+                return name;
+            };
+            this.price = function (val) {
+                if (val !== undefined && val !== price){ //price值发生了变化
+                    //触发了数据检测
+                    for (var i = 0; i < priceChanging.length; i++){
+                        //this 引用Book对象
+                        if (!priceChanging[i](this,val)){ //执行数组中存放的检测函数
+                            //设置的价格无效
+                            return price;
+                        }
+                    }
+                    //要设置的价格有效，则真正地修改这值
+                    price = val;
+                    //触发“属性修改完毕的事件”
+                    for (var i = 0; i < priceChanged.length; i++) {
+                        priceChanged[i](this);//修改时会调用的函数 修改 price属性
+                    }
+                }
+                //返回闭包中的price变量
+                return price;
+            };
+            this.onPriceChanging = function (callback) {
+                //将回调函数加入到数组
+                priceChanging.push(callback);
+            };
+            this.onPriceChanged = function (callback) {
+                priceChanged.push(callback)
+            };
+        };
+
+        var change = document.getElementById('Book');
+        //创建对象
+        var book = new Book('JavaScript',23.99);
+        change.innerHTML = '书名： ' + book.name() +": " +book.price();
+        console.info('书名： ' + book.name() +": " +book.price());
+        //定义具体的检查价格的函数
+        book.onPriceChanging(function (book,price) {
+            if (price < 0){
+                console.log('书价不能是负数：' + price);
+                return false;
+            }
+           return true; //可以修改
+        });
+
+        book.onPriceChanged(function (book) {
+
+            change.innerHTML  = "书价已经改为：" + book.price();
+            console.info("书价已经改为：" + book.price())
+        });
+
+        book.price(-100);
+        book.price(100);
+        console.info('书名： ' + book.name() +": " +book.price());
+
+    </script>
+
+</body>
+</html>

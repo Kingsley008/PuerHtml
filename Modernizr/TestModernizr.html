@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modernizr</title>
+    <style>
+        .show{
+              border-radius: 5px;
+              border: 1px black solid
+         }
+    </style>
+    <link rel="stylesheet" href="jquery-ui-1.12.1.custom/jquery-ui.css">
+</head>
+<body>
+    <div class="show">
+        show border-radius
+    </div>
+
+    <div>
+        <input type="date" id="date">
+    </div>
+
+</body>
+
+
+<script type="text/javascript" src="modernizr.custom.30718.js"></script>
+<script type="text/javascript" src="jquery-3.2.1.js"></script>
+<script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+
+
+<script>
+    if (Modernizr.video){
+        alert("browser support video element");
+    } else {
+        alert("your browser is out of date");
+    }
+    if (!Modernizr.inputtypes.date) {
+        alert("your browser is out of date");
+        $("#date").datepicker();
+    }
+</script>
+
+</html>

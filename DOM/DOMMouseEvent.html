@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>MouseEvent</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body style="height: 100%">
+    <div style="background-color: #2e7ecb" id="div">元素拖动实现</div>
+    <ul id="ul">
+        <li id="li1">1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</body>
+    <script>
+        /*兼容IE 添加 删除 监听事件*/
+        var addEvent = document.addEventListener?
+            function (elem, type, listener, useCapture) {
+                elem.addEventListener(type, listener,useCapture);
+            } :
+            function (elem, type, listener, userCapture) {
+                elem.attachEvent('on' + type, listener);
+            }
+
+        var delEvent = document.removeEventListener?
+            function (elem, type, listener, useCapture) {
+                elem.removeEventListener(type, listener, useCapture)
+            }:
+            function (elem, type, listener, useCapture) {
+                elem.detachEvent('on' + type, listener);
+            };
+
+        window.onload = function () {
+            var div = document.getElementById('div');
+            var clientX, clientY, moving;
+            var mouseDownHandler = function (event) {
+                event = event || window.event;
+                clientX = event.clientX;
+                clientY = event.clientY;
+                console.log("true 证明用户已经按下了鼠标");
+                moving  = !0;//true 证明用户已经按下了鼠标
+            };
+            var mouseMoveHandler = function (event) {
+                if (!moving){
+                    return;
+                }
+                event = event || window.event;
+                var newClientX = event.clientX,
+                    newClientY = event.clientY;
+                var left = parseInt(div.style.left) || 0;
+                var top = parseInt(div.style.top) || 0;
+                this.style.left = left + (newClientX - clientX) + "px"; //偏移量加原来离父元素的距离
+                this.style.top = top + (newClientY - clientY) + "px";
+                console.log(clientY,newClientY);
+                clientX = newClientX;
+                clientY = newClientY;
+            };
+
+            var mouseUpHandler = function (event) {
+                console.log("用户松开鼠标");
+                moving = !1;
+            };
+
+            addEvent(div,'mousedown',mouseDownHandler);
+            addEvent(div,'mousemove',mouseMoveHandler);
+            addEvent(div,'mouseup',mouseUpHandler);
+        }
+
+        /*利用冒泡的原理进行事件代理：父元素管理子元素的事件*/
+            var ul = document.getElementById('ul');
+            ul.addEventListener('click',function () {
+                alert("you lick li");
+            });
+    </script>
+</html>

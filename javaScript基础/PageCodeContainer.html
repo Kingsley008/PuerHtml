@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用代码容器解决变量以及函数重名问题</title>
+</head>
+<body>
+    <h3 id="showTime"></h3>
+    <script>
+
+        var PageCondeConatainer = {
+            result: document.getElementById('showTime'),
+            show:function () {
+                this.result.innerHTML = new Date().toLocaleString();
+            }
+        };
+        setInterval(PageCondeConatainer.show.bind(PageCondeConatainer),1000);
+        var result = null; //不会影响上面函数的调用 缺点：showTime 被写死 无法实现代码活用
+        /*改进方法*/
+        var showId = 'showTime';
+        //使用立即执行函数封装数据，实现信息隐藏
+        var myContainer = (function (outputElemId) {
+            //将具体的元素id外化为参数
+            var result = document.getElementById(outputElemId);//result 成为了函数内部变量
+            var show = function () {
+                this.result.innerHTML = new Date().toLocaleString();
+            };
+            return{
+                show:show
+            }
+        })(showId)
+        setInterval(myContainer.show.bind(myContainer),1000);
+        /*实现container的扩充*/
+        myContainer =(function (oldContainer) {
+            //为老容器扩充功能
+            oldContainer.info = "扩充后的容器"; //容器中新增了一个属性 info
+            return oldContainer;
+        })(myContainer);
+        console.info(myContainer.info);
+
+    </script>
+
+</body>
+</html>

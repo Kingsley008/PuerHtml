@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <div id="t1">
+     大风起兮<span class="beautiful">云飞扬<p class="2 beautiful"></p></span>,<span>啦啦啦</span>归故乡。
+ </div>
+    <script>
+        /*兼容element.children 获得该节点的子节点*/
+        function getElementChild(element) {
+            if (element.children){
+                return element.children;
+            } else {
+                var elementArr = [];//声明一个数组用以存放之后获取的子节点
+                var nodeList = element.childNodes;//接收所有子节点集合
+                for( var i = 0; i < elementArr.length; i++){
+                    if (nodeList[i] == 1){ //1为元素节点
+                        elementArr.push(nodeList[i]);//加入元素数组
+                    }
+                }
+            }
+            return elementArr;
+        };
+        //测试
+        var x = document.getElementById('t1');
+        console.log(x.children); //获得这个元素的子元素
+        console.log(x.firstChild); //  大风起兮
+        console.log(x.childNodes);//包含所有元素的数组
+        console.log(getElementChild(x));
+
+        /*兼容elements.getElementsByClass()*/
+        function getElementsByClassName(element,className) {
+            if (element.getElementsByClassName){ //特性侦测
+                return element.getElementsByClassName(className);
+            } else {
+                var elements = element.getElementsByTagName('*');
+                var result = [];
+                var element,
+                    classNameStr,
+                    flag;
+                className = className.split(' ');
+                for (var i = 0; element = elements[i]; i++) {
+                    classNameStr = ' ' + element.className + ' ';
+                    flag = true;
+                    for (var j = 0, name; name = className[j]; j++) {
+                        if (classNameStr.indexOf(' ' + name + '' ) == -1){
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if (flag) {
+                        result.push(element)
+                    }
+                }
+                return result;
+            }
+        };
+        console.log(x.getElementsByClassName('beautiful'));
+        console.log(getElementsByClassName(x,'beautiful'));
+        var b2 = getElementsByClassName(x, '2 beautiful');
+
+    </script>
+
+</body>
+</html>

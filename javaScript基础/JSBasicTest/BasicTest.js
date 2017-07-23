@@ -161,40 +161,27 @@ function myType(obj){
 请写出函数search的实现代码 请给出函数，要求不能使用Array的原型方法，且算法时间复杂度低于O(n)。*/
 
 var arr = [1, 2, 4, 6, 7, 9, 19,20, 30, 40, 45, 47];
-function search(arr,value) {
 
-    for (var i = 0; i < arr.length; i++){
-
-         if (arr[i] == value){
-          return i;
-         }
+// 非递归算法
+function binary_search(arr, key) {
+    var low = 0,
+        high = arr.length - 1;
+    while(low <= high){
+        var mid = parseInt((high + low) / 2);
+        if(key == arr[mid]){
+            return  mid;
+        }else if(key > arr[mid]){
+            low = mid + 1;
+        }else if(key < arr[mid]){
+            high = mid -1;
+        }else{
+            return -1;
+        }
     }
-}
+};
+var result = binary_search(arr,45);
+alert(result); //  返回目标元素的索引值 10
 
-search(arr,45);
-
-
-/*function search2(arr, value) {
-         var length = arr.length;
-         re(Math.round((length-1)/2));
-     function re(positon) {
-
-
-         if (arr[positon] > value){
-                   return re(Math.round(length *(1/2)));
-         }
-
-         if (arr[positon] < value){
-                   return re(Math.round(length*(3/4)));
-         }
-
-         if (arr[positon] == value){
-             return positon;
-         }
-}
-
-}
-search2(arr,4);*/
 
 
 /*
@@ -208,7 +195,37 @@ search2(arr,4);*/
 	formatDate(date, "yyyy-MM-dd HH");		返回值： "2001-09-11 08"
 	formatDate(date, "yyyy-MM-dd HH:mm:ss");    返回值： "2001-09-11 08:26:08"
 请写出函数formatDate的实现代码。*/
-
+/*输入一个Date对象对其进行格式化*/
+var today = new Date();
+console.info(today);
+function pad(str) {
+    if(str >10){
+        return str + ""
+    }
+    if(str < 10){
+        return "0" + str;
+    }
+}
+function formatDate(date,format) {
+    switch (format){
+        case 'yyyy':
+            return date.getFullYear();
+        case 'yyyy-MM-dd':
+            return date.getFullYear() +"-" + pad(date.getMonth()+1)+"-"+ pad(date.getDate());
+        case 'yyyy-MM-dd HH':
+            return date.getFullYear() +"-" + pad(date.getMonth()+1)+"-"+ pad(date.getDate())+" "+pad(date.getHours());
+        case'mm-dd':
+            return  pad(date.getMonth()+1)+"-"+ pad(date.getDate());
+        case 'hh-mm-ss':
+            return pad(date.getHours())+":"+pad(date.getMinutes())+":"+pad(date.getSeconds());
+        case 'hh-mm':
+            return pad(date.getHours())+":"+pad(date.getMinutes());
+        case'yyyy-MM-dd HH:mm:ss':
+            return  date.getYear() +"-" + pad(date.getMonth()+1)+"-"+ pad(date.getDate())+" "
+                pad(date.getHours())+":"+pad(date.getMinutes())+":"+ pad(date.getSeconds());
+    }
+}
+formatDate(today,'hh-mm-ss');
 /*编码实现下面删除数组中重复元素的功能
 [2,4,2,3,4].deleteRepeat()		返回：[2,4,3]*/
 
@@ -241,4 +258,27 @@ Array.prototype.deleByStr = function (str) {
 arr = [2,4,2,3,4];
 arr.deleByStr(3);
 console.info(arr);
+
+/**
+ * 闭包使用举例1
+ * 将字符串中的一些特定字符按顺序用数组中的元素替换，例如：
+ * var arr = ['c','f','h','o'];
+ * var str = 'ab4de8g4ijklmn7';
+ * 替换后 str == 'abcdefghijklmno';
+ * replace的用法请参考https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace
+ **/
+var arr = ['c','f','h','o'];
+var str = 'ab4de8g4ijklmn7';
+
+var change = (function() {
+    var count = 0;
+    return function () {
+        return arr[count++];
+
+    }
+
+})();
+
+var newStr = str.replace(/\d/g,change);
+console.info(newStr);
 
